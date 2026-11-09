@@ -1,4 +1,4 @@
-.register-page{--reg-bg:#080b18;--reg-panel:#11162a;--reg-card:#171d33;--reg-border:#30364d;--reg-text:#fff;--reg-muted:#a7adbd;--reg-purple:#8a50e8;--reg-pink:#dd5da9;min-height:100vh;display:grid;grid-template-columns:minmax(0,45fr) minmax(0,55fr);background:var(--reg-bg);color:var(--reg-text);font-family:'Poppins',sans-serif;overflow:hidden}
+﻿.register-page{--reg-bg:#080b18;--reg-panel:#11162a;--reg-card:#171d33;--reg-border:#30364d;--reg-text:#fff;--reg-muted:#a7adbd;--reg-purple:#B8860B;--reg-pink:#dd5da9;min-height:100vh;display:grid;grid-template-columns:minmax(0,45fr) minmax(0,55fr);background:var(--reg-bg);color:var(--reg-text);font-family:'Poppins',sans-serif;overflow:hidden}
 .register-page *{box-sizing:border-box}
 .register-page a{color:inherit}
 .register-story{position:relative;isolation:isolate;min-height:100vh;overflow:hidden;background:#0b0e19}
@@ -9,17 +9,17 @@
 .register-brand img{width:42px;height:42px;object-fit:contain;border-radius:5px;background:#fff}
 .register-brand small{display:block;margin-top:6px;color:#cbc9d4;font:600 8px/1 'Poppins',sans-serif;letter-spacing:.17em}
 .story-copy{padding:42px 0 52px;max-width:500px;animation:registerFade .55s ease both}
-.story-kicker,.form-eyebrow{font-size:9px;font-weight:700;letter-spacing:.19em;color:#c4a3ff}
+.story-kicker,.form-eyebrow{font-size:9px;font-weight:700;letter-spacing:.19em;color:#B8860B}
 .story-kicker i{display:inline-block;width:6px;height:6px;margin:0 8px 1px 0;border-radius:50%;background:#d169bc;box-shadow:0 0 12px #d169bc}
 .story-copy h1{margin:23px 0 16px;font:600 clamp(39px,5vw,65px)/1.11 Poppins,sans-serif;letter-spacing:-.055em}
-.story-copy h1 em{font-style:normal;background:linear-gradient(100deg,#bd98ff,#e77abd);-webkit-background-clip:text;background-clip:text;color:transparent}
+.story-copy h1 em{font-style:normal;background:linear-gradient(100deg,#B8860B,#e77abd);-webkit-background-clip:text;background-clip:text;color:transparent}
 .story-copy p{max-width:390px;margin:0;color:#c0c2cd;font-size:14px;line-height:1.8}
 .story-bottom{display:flex;align-items:center;justify-content:space-between;color:#a2a6b3;font-size:8px;font-weight:600;letter-spacing:.14em}
-.story-bottom i{display:inline-block;width:35px;margin:0 8px 2px;border-top:1px solid #8d65ca}
-.register-panel{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:36px clamp(24px,5vw,76px);overflow:auto;background:radial-gradient(ellipse at 95% 8%,rgba(124,58,237,.12),transparent 38%),#0b0e19}
+.story-bottom i{display:inline-block;width:35px;margin:0 8px 2px;border-top:1px solid #B8860B}
+.register-panel{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:36px clamp(24px,5vw,76px);overflow:auto;background:radial-gradient(ellipse at 95% 8%,rgba(184, 134, 11, .12),transparent 38%),#0b0e19}
 .register-card{width:min(100%,650px);padding:clamp(26px,3.2vw,43px);border:1px solid rgba(255,255,255,.09);border-radius:18px;background:linear-gradient(145deg,rgba(26,32,56,.97),rgba(19,24,43,.98));box-shadow:0 25px 80px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.045);animation:registerFade .45s ease both}
 .register-heading{margin-bottom:25px}
-.form-eyebrow{font-size:8px;color:#b493ee}
+.form-eyebrow{font-size:8px;color:#B8860B}
 .register-heading h2{margin:9px 0 7px;font:700 clamp(25px,3vw,32px)/1.2 Poppins,sans-serif;letter-spacing:-.04em;color:#fff}
 .register-heading p{margin:0;color:#aeb3c2;font-size:12px;line-height:1.6}
 .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px 14px}
@@ -29,14 +29,14 @@
 .register-field>input,.password-control input{width:100%;height:44px;border:1px solid #343a51;border-radius:8px;outline:0;background:#101528;color:#fff;padding:0 12px;font-size:11px;transition:border-color .2s,box-shadow .2s,background .2s}
 .register-field>input::placeholder,.password-control input::placeholder{color:#777f94}
 .register-field>input:hover,.password-control:hover{border-color:#4a5067}
-.register-field>input:focus,.password-control:focus-within{border-color:#9b68ec;box-shadow:0 0 0 3px rgba(137,80,232,.17);background:#12182d}
+.register-field>input:focus,.password-control:focus-within{border-color:#B8860B;box-shadow:0 0 0 3px rgba(184, 134, 11, .17);background:#12182d}
 .register-field>input[aria-invalid="true"],.password-control.invalid{border-color:#ef626b}
 .register-field>input[aria-invalid="true"]:focus,.password-control.invalid:focus-within{box-shadow:0 0 0 3px rgba(239,68,68,.13)}
 .password-control{height:44px;display:flex;align-items:center;border:1px solid #343a51;border-radius:8px;background:#101528;transition:border-color .2s,box-shadow .2s,background .2s}
 .password-control input{height:42px;min-width:0;border:0;background:transparent;box-shadow:none!important}
 .password-control input:focus{background:transparent}
 .visibility-toggle{width:42px;height:42px;flex:0 0 42px;display:grid;place-items:center;border:0;border-radius:7px;background:transparent;color:#9aa1b5;cursor:pointer;transition:color .2s,background .2s}
-.visibility-toggle:hover{color:#d2b6ff;background:#ffffff0a}
+.visibility-toggle:hover{color:#B8860B;background:#ffffff0a}
 .visibility-toggle svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .field-error{margin:6px 0 0;color:#ff747a;font-size:10px;line-height:1.4;animation:errorIn .18s ease both}
 .password-strength{display:flex;align-items:center;gap:7px;margin-top:8px;color:#8d94a8;font-size:9px}
@@ -50,21 +50,21 @@
 .password-strength>b.weak{color:#ff747a}.password-strength>b.medium{color:#f1c46d}.password-strength>b.strong{color:#59d391}
 .terms-row{display:flex;align-items:flex-start;gap:9px;margin:19px 0 0}
 .terms-row>input{appearance:none;width:15px;height:15px;flex:0 0 15px;margin:1px 0 0;border:1px solid #596077;border-radius:4px;background:#101528;cursor:pointer;transition:background .18s,border-color .18s}
-.terms-row>input:checked{border-color:#9c63ed;background:#8a50e8;box-shadow:inset 0 0 0 3px #171d33}
+.terms-row>input:checked{border-color:#B8860B;background:#B8860B;box-shadow:inset 0 0 0 3px #171d33}
 .terms-row>input[aria-invalid="true"]{border-color:#ef626b}
 .terms-row>label{color:#afb4c3;font-size:10px;line-height:1.55}
-.terms-row a{color:#d2b2ff;text-decoration:none;border-bottom:1px solid #8d65c988}
+.terms-row a{color:#B8860B;text-decoration:none;border-bottom:1px solid #B8860B88}
 .terms-row a:hover{color:#f0d5ff}
 .terms-error{margin:6px 0 0 24px}
 .register-success{margin:14px 0 0;padding:10px 12px;border:1px solid #236e4b;border-radius:7px;background:#12372455;color:#63d597;font-size:11px;animation:errorIn .2s ease both}
-.create-account{width:100%;height:47px;margin-top:19px;padding:0 16px;display:flex;align-items:center;justify-content:center;gap:11px;border:1px solid #a967e7;border-radius:8px;background:linear-gradient(110deg,#7c3aed,#a14ddd 58%,#cf4fa6);color:#fff;font-size:12px;font-weight:700;letter-spacing:.02em;cursor:pointer;box-shadow:0 9px 24px rgba(124,58,237,.2);transition:transform .2s,box-shadow .2s,filter .2s}
-.create-account:hover{transform:translateY(-1px);filter:brightness(1.08);box-shadow:0 12px 27px rgba(124,58,237,.28)}
+.create-account{width:100%;height:47px;margin-top:19px;padding:0 16px;display:flex;align-items:center;justify-content:center;gap:11px;border:1px solid #B8860B;border-radius:8px;background:linear-gradient(110deg,#B8860B,#B8860B 58%,#cf4fa6);color:#fff;font-size:12px;font-weight:700;letter-spacing:.02em;cursor:pointer;box-shadow:0 9px 24px rgba(184, 134, 11, .2);transition:transform .2s,box-shadow .2s,filter .2s}
+.create-account:hover{transform:translateY(-1px);filter:brightness(1.08);box-shadow:0 12px 27px rgba(184, 134, 11, .28)}
 .create-account:active{transform:translateY(0)}
 .create-account:disabled{opacity:.7;cursor:wait}
 .create-account span{font-size:15px;transition:transform .2s}
 .create-account:hover span{transform:translate(2px,-2px)}
 .login-prompt{margin:19px 0 0;text-align:center;color:#aeb3c2;font-size:11px}
-.login-prompt a{color:#d2b2ff;font-weight:700;text-decoration:none}
+.login-prompt a{color:#B8860B;font-weight:700;text-decoration:none}
 .login-prompt a:hover{color:#f0d5ff;text-decoration:underline}
 .register-legal{margin-top:21px;padding-top:15px;border-top:1px solid #ffffff0d;text-align:center;color:#7f879b;font-size:7px;letter-spacing:.14em}
 .register-legal span{color:#aaa3bc}

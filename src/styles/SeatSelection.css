@@ -1,0 +1,82 @@
+.seat-selection-page{--seat-gold:#B8860B;--seat-light-gold:#F5C518;--seat-bg:#F5F3ED;--seat-ink:#1B1915;--seat-muted:#777166;min-height:100vh;overflow-x:hidden;background:var(--seat-bg);color:var(--seat-ink);font-family:'Poppins',sans-serif;padding-bottom:112px}
+.seat-selection-page *{box-sizing:border-box}
+.seat-selection-main{width:min(1160px,100%);margin:0 auto;padding:25px 34px 35px}
+.seat-booking-heading{padding:19px 22px 21px;border:1px solid #E3DED2;border-radius:14px;background:#fff;box-shadow:0 6px 22px rgba(37,30,14,.045)}
+.seat-booking-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px;padding-bottom:13px;border-bottom:1px solid #F0EDE6}
+.seat-back-link{display:inline-flex;align-items:center;gap:8px;color:#755716;font-size:13px;font-weight:600;text-decoration:none}
+.seat-back-link:hover{color:#B8860B}
+.ticket-count-label{display:flex;align-items:center;gap:9px;color:#777166;font-size:12px;font-weight:600}
+.ticket-count-label select{min-height:36px;padding:0 27px 0 10px;border:1px solid #E0DACC;border-radius:7px;background:#fff;color:#29261f;font:inherit;font-size:12px;cursor:pointer}
+.ticket-count-label select:focus{outline:2px solid #B8860B66;outline-offset:1px}
+.seat-movie-show{display:flex;align-items:center;gap:14px}
+.seat-movie-mark{flex:0 0 42px;width:42px;height:42px;display:grid;place-items:center;border:1px solid #E7DDBF;border-radius:11px;background:linear-gradient(145deg,#FFF8E2,#F5F0E2);color:#9B7118;font-size:20px;font-weight:700}
+.seat-movie-info{min-width:0;flex:1}
+.seat-movie-info .section-kicker,.seat-map-topline .section-kicker,.selected-seats-card .section-kicker,.seat-price-card .section-kicker,.seat-sticky-info .section-kicker{color:#9B7118;font-size:9px;font-weight:700;letter-spacing:.14em}
+.seat-movie-info h1{margin:3px 0 3px;color:#1B1915;font-size:23px;line-height:1.3;font-weight:700;letter-spacing:-.025em}
+.seat-movie-info>p{margin:0 0 5px;color:#625F58;font-size:12px}
+.seat-show-meta{display:flex;align-items:center;flex-wrap:wrap;gap:8px;color:#777166;font-size:11px}
+.seat-show-meta i{width:4px;height:4px;border-radius:50%;background:#B8860B}
+.ticket-count-badge{display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid #eadba9;border-radius:9px;background:#FFFAE9;color:#72500d}
+.ticket-count-badge strong{font-size:19px}.ticket-count-badge span{font-size:11px;font-weight:600}
+.seat-map-card{margin-top:19px;padding:22px 24px 19px;border:1px solid #E3DED2;border-radius:14px;background:#fff;box-shadow:0 6px 22px rgba(37,30,14,.04)}
+.seat-map-topline{display:flex;align-items:center;justify-content:space-between;gap:15px}
+.seat-map-actions{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:12px}
+.seat-map-topline h2{margin:3px 0 2px;color:#1B1915;font-size:20px;font-weight:650;letter-spacing:-.02em}
+.seat-map-topline p{margin:0;color:#777166;font-size:12px}
+.seat-zoom-controls{display:flex;align-items:center;gap:9px;padding:4px;border:1px solid #E5E0D6;border-radius:9px;background:#FBFAF7}
+.seat-zoom-controls button{width:30px;height:29px;border:0;border-radius:6px;background:#fff;color:#66500f;font-size:19px;line-height:1;cursor:pointer;box-shadow:0 1px 3px #1b19151a}
+.seat-zoom-controls button:disabled{color:#b8b3a7;cursor:not-allowed;box-shadow:none}
+.seat-zoom-controls span{min-width:40px;text-align:center;color:#625F58;font-size:10px;font-weight:600}
+.seat-category-key{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin:22px 0 15px}
+.seat-category-key span{display:flex;align-items:center;gap:10px;padding:7px 10px;border:1px solid #E9E4D9;border-radius:7px;background:#FCFBF8;color:#625F58;font-size:9px;font-weight:700;letter-spacing:.08em}
+.seat-category-key b{color:#29261f;font-size:10px;letter-spacing:0}
+.seat-category-key .category-premium{border-color:#eadba9;background:#FFFAE9;color:#866318}
+.seat-category-key .category-gold{border-color:#e8d8c0;background:#FBF5EB;color:#93621f}
+.seat-category-key .category-executive{border-color:#dfe6df;background:#f7faf7;color:#54775b}
+.seat-map-viewport{max-width:100%;overflow:auto;overscroll-behavior-x:contain;padding:7px 2px 11px;scrollbar-width:thin;scrollbar-color:#d5c89e transparent}
+.seat-map-inner{width:max-content;min-width:100%;display:flex;justify-content:center}
+.seat-row-list{width:max-content;display:flex;flex-direction:column;gap:7px}
+.seat-map-row{display:flex;align-items:center;gap:10px;width:max-content}
+.seat-row-label{position:sticky;left:0;z-index:2;flex:0 0 22px;width:22px;height:34px;display:grid;place-items:center;border-radius:5px;background:#fff;color:#817969;font-size:11px;font-weight:700;box-shadow:4px 0 7px #fff}
+.seat-group{display:flex;gap:6px}
+.seat-group+.seat-group{margin-left:calc(13px * var(--seat-zoom, 1))}
+.cinema-seat{width:calc(35px * var(--seat-zoom, 1));height:calc(33px * var(--seat-zoom, 1));flex:0 0 calc(35px * var(--seat-zoom, 1));padding:0;border:1px solid #cbd9cc;border-radius:7px 7px 4px 4px;background:#F7FBF7;color:#3f7851;font-family:inherit;font-size:calc(10px * var(--seat-zoom, 1));font-weight:600;line-height:1;cursor:pointer;transition:background .15s,border-color .15s,transform .15s,box-shadow .15s}
+.cinema-seat:hover:not(:disabled){transform:translateY(-2px);border-color:#699a70;box-shadow:0 3px 7px #1b19151a}
+.cinema-seat.seat-available.seat-category-premium{border-color:#ddc77e;background:#fffbed;color:#806012}
+.cinema-seat.seat-available.seat-category-gold{border-color:#e5d3ac;background:#fcf8ef;color:#8d6725}
+.cinema-seat.seat-available.seat-category-executive{border-color:#cbd9cc;background:#F7FBF7;color:#3f7851}
+.cinema-seat.seat-bestseller{border-color:#d9b965;background:#FFFBEE;color:#866318;box-shadow:inset 0 0 0 1px #f2e4bb}
+.cinema-seat.seat-selected{border-color:#B8860B;background:linear-gradient(145deg,#F5C518,#D8A70E);color:#302304;box-shadow:0 2px 8px #b8860b40}
+.cinema-seat.seat-sold{border-color:#e4e1da;background:#e9e7e2;color:#aaa69d;cursor:not-allowed}
+.seat-screen{width:min(520px,85%);height:42px;display:flex;align-items:flex-end;justify-content:center;margin:20px auto 0;border-top:3px solid #c9b576;border-radius:50% 50% 0 0 / 100% 100% 0 0;background:linear-gradient(180deg,#fff9e8,rgba(255,249,232,0));color:#897440;font-size:9px;font-weight:700;letter-spacing:.19em;text-shadow:0 2px 9px #b8860b22}
+.seat-screen span{padding-bottom:4px}
+.seat-legend{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:17px;margin-top:17px;color:#625F58;font-size:10px}
+.seat-legend span{display:flex;align-items:center;gap:6px}
+.seat-legend i{width:13px;height:12px;border:1px solid;border-radius:3px}
+.seat-legend-available{border-color:#cbd9cc!important;background:#F7FBF7}.seat-legend-sold{border-color:#e4e1da!important;background:#e9e7e2}.seat-legend-best{border-color:#d9b965!important;background:#FFFBEE}.seat-legend-selected{border-color:#B8860B!important;background:#F5C518}
+.seat-selection-details{display:grid;grid-template-columns:1.15fr .85fr;gap:13px;margin-top:15px}
+.selected-seats-card,.seat-price-card{padding:16px 18px;border:1px solid #E3DED2;border-radius:12px;background:#fff}
+.selected-seats-card h2{margin:5px 0 4px;color:#1B1915;font-size:17px;font-weight:650}
+.selected-seats-card p{margin:0;color:#72500d;font-size:13px;font-weight:600}
+.selected-seats-card small{display:block;margin-top:7px;color:#898377;font-size:10px}
+.seat-price-card>div{display:flex;justify-content:space-between;gap:15px;margin-top:10px;color:#777166;font-size:12px}
+.seat-price-card>div strong{color:#514D45;font-weight:600}
+.seat-price-card .seat-total{margin-top:11px;padding-top:10px;border-top:1px solid #EFECE4;color:#29261f;font-weight:700}
+.seat-price-card .seat-total strong{color:#70500e;font-size:16px}
+.seat-sticky-summary{position:fixed;z-index:30;right:0;bottom:0;left:0;min-height:78px;display:flex;align-items:center;gap:28px;padding:12px max(26px,calc((100vw - 1090px)/2));border-top:1px solid #e6deca;background:rgba(255,255,255,.97);box-shadow:0 -8px 28px rgba(34,29,18,.08);backdrop-filter:blur(12px)}
+.seat-sticky-info{min-width:0;flex:1;display:flex;flex-direction:column;gap:3px}
+.seat-sticky-info strong{overflow:hidden;color:#29261f;font-size:13px;text-overflow:ellipsis;white-space:nowrap}
+.seat-sticky-total{display:flex;flex-direction:column;gap:2px;color:#777166;font-size:10px}
+.seat-sticky-total strong{color:#29261f;font-size:17px}
+.seat-continue-button{min-width:150px;min-height:43px;display:flex;align-items:center;justify-content:center;gap:12px;padding:0 16px;border:0;border-radius:8px;background:linear-gradient(135deg,#F5C518,#B8860B);color:#1B1915;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 5px 14px #b8860b2a;transition:filter .2s,transform .2s}
+.seat-continue-button:hover:not(:disabled){filter:brightness(1.06);transform:translateY(-1px)}
+.seat-continue-button:disabled{background:#e6e2d8;color:#aaa69d;box-shadow:none;cursor:not-allowed}
+.seat-not-found{min-height:calc(100vh - 140px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 20px;text-align:center}
+.seat-not-found .section-kicker{color:#9B7118;font-size:10px;font-weight:700;letter-spacing:.14em}
+.seat-not-found h1{margin:8px 0;color:#1B1915;font-size:30px}
+.seat-not-found p{margin:0 0 20px;color:#625F58;font-size:14px}
+.seat-not-found .primary-btn{display:inline-flex;padding:11px 16px;border-radius:8px;background:linear-gradient(135deg,#F5C518,#B8860B);color:#1B1915;font-size:13px;font-weight:700;text-decoration:none}
+.seat-toast{z-index:50;bottom:100px}
+@media(max-width:760px){.seat-selection-main{padding:20px 22px 30px}.seat-map-card{padding:19px 17px 17px}.seat-map-inner{justify-content:flex-start}.seat-row-label{position:sticky;left:0}.seat-selection-details{grid-template-columns:1fr 1fr}.seat-sticky-summary{gap:18px;padding-right:22px;padding-left:22px}}
+@media(max-width:520px){.seat-selection-page{padding-bottom:95px}.seat-selection-main{padding:14px 12px 22px}.seat-booking-heading{padding:15px 14px;border-radius:11px}.seat-booking-top{margin-bottom:12px;padding-bottom:10px}.seat-back-link{font-size:11px}.ticket-count-label{gap:5px;font-size:10px}.ticket-count-label select{min-height:33px;padding-left:7px;padding-right:20px;font-size:10px}.seat-movie-show{gap:10px}.seat-movie-mark{flex-basis:35px;width:35px;height:35px;border-radius:9px;font-size:17px}.seat-movie-info .section-kicker{font-size:8px}.seat-movie-info h1{font-size:17px}.seat-movie-info>p{font-size:10px}.seat-show-meta{gap:5px;font-size:9px}.ticket-count-badge{gap:5px;padding:6px 8px}.ticket-count-badge strong{font-size:16px}.ticket-count-badge span{font-size:9px}.seat-map-card{margin-top:13px;padding:15px 10px 14px;border-radius:11px}.seat-map-topline{align-items:flex-start;flex-wrap:wrap}.seat-map-actions{margin-left:auto;gap:7px}.seat-map-topline h2{font-size:17px}.seat-map-topline p{max-width:230px;font-size:10px;line-height:1.5}.seat-zoom-controls{gap:4px}.seat-zoom-controls button{width:26px;height:26px}.seat-zoom-controls span{min-width:33px;font-size:9px}.seat-category-key{gap:5px;margin:15px 0 11px}.seat-category-key span{gap:5px;padding:6px 7px;font-size:8px}.seat-category-key b{font-size:9px}.seat-map-viewport{margin-right:-2px;margin-left:-2px;padding-top:5px}.seat-map-inner{justify-content:flex-start}.seat-map-row{gap:7px}.seat-row-label{flex-basis:24px;width:24px;height:34px;font-size:10px}.seat-group{gap:4px}.seat-group+.seat-group{margin-left:calc(9px * var(--seat-zoom, 1))}.cinema-seat{width:max(34px,calc(35px * var(--seat-zoom, 1)));height:34px;flex-basis:max(34px,calc(35px * var(--seat-zoom, 1)));font-size:10px}.seat-screen{height:36px;margin-top:15px;font-size:8px}.seat-legend{gap:10px;margin-top:13px;font-size:9px}.seat-legend i{width:12px;height:11px}.seat-selection-details{gap:8px;margin-top:10px}.selected-seats-card,.seat-price-card{padding:12px 11px;border-radius:10px}.selected-seats-card .section-kicker,.seat-price-card .section-kicker{font-size:8px}.selected-seats-card h2{font-size:14px}.selected-seats-card p{font-size:11px;overflow-wrap:anywhere}.selected-seats-card small{font-size:9px}.seat-price-card>div{gap:8px;margin-top:8px;font-size:10px}.seat-price-card .seat-total strong{font-size:14px}.seat-sticky-summary{min-height:72px;gap:11px;padding:9px 12px}.seat-sticky-info .section-kicker{font-size:8px}.seat-sticky-info strong{max-width:145px;font-size:10px}.seat-sticky-total{font-size:9px}.seat-sticky-total strong{font-size:14px}.seat-continue-button{flex:0 0 108px;min-width:108px;min-height:40px;gap:7px;padding:0 8px;font-size:11px}.seat-toast{bottom:82px}}
+@media(prefers-reduced-motion:reduce){.seat-selection-page *{scroll-behavior:auto!important;transition-duration:.01ms!important}}

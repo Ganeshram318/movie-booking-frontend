@@ -1,196 +1,561 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; min-width: 320px; background: #F5F3ED; color: #1B1915; font-family: 'Poppins', sans-serif; }
+body { margin: 0; min-width: 320px; background: #080B18; color: #FFFFFF; font-family: 'Poppins', sans-serif; }
 button, input, textarea, select { font-family: inherit; }
 :root {
   color-scheme: light;
-  --seatify-bg: #F5F3ED;
+  --seatify-bg: #F6F7FB;
+  --seatify-header: #FFFFFF;
   --seatify-surface: #FFFFFF;
-  --seatify-gold: #F5C518;
-  --seatify-gold-dark: #B8860B;
-  --seatify-gold-light: #FFD966;
-  --seatify-text: #1B1915;
-  --seatify-muted: #625F58;
-  --seatify-border: #DED9CF;
+  --seatify-primary: #F59E0B;
+  --seatify-primary-hover: #D97706;
+  --seatify-accent: #EC4899;
+  --seatify-text: #192132;
+  --seatify-secondary: #475569;
+  --seatify-muted: #64748B;
+  --seatify-border: #E2E8F0;
   --seatify-success: #22C55E;
+  --seatify-warning: #F59E0B;
   --seatify-error: #EF4444;
+  --seatify-gold: #F59E0B;
+  --seatify-gold-dark: #D97706;
+  --seatify-gold-light: #EC4899;
 }
 
-.site-footer {
-  background: linear-gradient(135deg, #0f172a 0%, #111827 100%);
-  color: #e2e8f0;
-}
+/* SEATIFY navy palette with orange-to-pink primary actions. */
+#root .seatify-app{--bg:#080B18;--panel:#151A30;--muted:#94A3B8;--text:#FFFFFF;--purple:#B8860B;--pink:#EC4899;--gold:#F59E0B;--gold-dark:#D97706;--gold-light:#F59E0B;--border:#27304A;background:#080B18;color:#FFFFFF}
+#root .seat-header{--header-bg:rgba(13,17,36,.96);background:#0D1124;border-color:#27304A}
+#root .seat-header:before{background:rgba(184, 134, 11, .08)}
+#root .seat-header.scrolled{--header-bg:rgba(13,17,36,.97);border-bottom-color:#27304A}
+#root .seat-header .brand,#root .seat-header .brand-seat{color:#FFFFFF}
+#root .seat-header .brand-ify,#root .seat-header .brand-mark{color:#EC4899}
+#root .seat-header .brand small,#root .seat-header .city-picker,#root .seat-header .nav-note{color:#CBD5E1}
+#root .seat-header .search-box{background:#151A30;border-color:#27304A;color:#CBD5E1}
+#root .seat-header .search-box input{color:#FFFFFF}
+#root .seat-header .search-box input::placeholder,#root .seat-header .search-box kbd{color:#94A3B8}
+#root .seat-header .search-box:focus-within{border-color:#B8860B;box-shadow:0 0 0 4px rgba(184, 134, 11, .18)}
+#root .seat-header .search-box:focus-within .seat-icon,#root .seat-header .city-picker>.seat-icon{color:#B8860B}
+#root .seat-header .search-box kbd{border-color:#27304A;background:#151A30}
+#root .seat-header .city-picker:hover{background:rgba(184, 134, 11, .12);border-color:rgba(184, 134, 11, .3);color:#FFFFFF}
+#root .seat-header .city-picker option{background:#151A30;color:#FFFFFF}
+#root .seat-header .city-picker>span{color:#94A3B8}
+#root .seat-header .city-picker:hover>span{color:#EC4899}
+#root .seat-header .sign-in,#root .seatify-app .primary-btn,#root .seatify-app .quick-book,#root .register-page .create-account,#root .seat-continue-button{background:linear-gradient(90deg,#F59E0B 0%,#EC4899 100%);color:#FFFFFF}
+#root .seat-header .sign-in:hover,#root .seatify-app .primary-btn:hover,#root .seatify-app .quick-book:hover,#root .register-page .create-account:hover,#root .seat-continue-button:hover:not(:disabled){background:linear-gradient(90deg,#D97706 0%,#DB2777 100%);color:#FFFFFF}
+#root .seat-header .nav-row{border-top-color:#27304A}
+#root .seat-header .nav-links a{color:#CBD5E1}
+#root .seat-header .nav-links a:hover{background:rgba(255,255,255,.06);color:#FFFFFF}
+#root .seat-header .nav-links a.selected{color:#EC4899}
+#root .seat-header .nav-links a.selected:after{background:#B8860B}
+#root .seat-header .nav-note i,#root .seat-header .menu-toggle span{background:#B8860B}
+#root .seat-header .menu-toggle:hover{background:rgba(255,255,255,.06)}
+#root .seat-header :focus-visible{outline-color:#EC4899}
+#root .seat-header .sign-in{box-shadow:0 5px 18px rgba(184, 134, 11, .2)}
 
-.footer-variant-one {
-  background: linear-gradient(135deg, #0f172a 0%, #111827 100%);
-}
+/* Home Page surfaces, text, and states. */
+#root .hero-shell{background:#080B18}
+#root .hero-backdrop:after{background:linear-gradient(90deg,#080B18 0%,rgba(8,11,24,.91) 24%,rgba(8,11,24,.68) 52%,rgba(8,11,24,.3) 100%),linear-gradient(0deg,#080B18 0%,transparent 35%,rgba(8,11,24,.12) 100%)}
+#root .hero-shade{background:radial-gradient(ellipse at 76% 38%,rgba(184, 134, 11, .18),transparent 40%)}
+#root .hero-copy h1,#root .hero-rating,#root .section-heading h2,#root .movie-info h3,#root .theatre-detail h3,#root .offer-card h3{color:#FFFFFF}
+#root .hero-meta,#root .hero-copy>p,#root .movie-info p,#root .theatre-detail p,#root .theatre-detail div,#root .offer-card p,#root .offer-card>small{color:#CBD5E1}
+#root .eyebrow,#root .section-kicker,#root .hero-rating small,#root .hero-vertical,#root .offer-top span,#root .offer-top b,#root .offer-card button{color:#EC4899}
+#root .text-link{color:#B8860B!important}
+#root .hero-meta b,#root .play-icon,#root .section-heading h2 span,#root .text-link b{color:#B8860B}
+#root .hero-rating>span{color:#F59E0B}
+#root .hero-rating i,#root .slide-count i,#root .hero-vertical{border-color:#27304A}
+#root .outline-btn{background:rgba(13,17,36,.78);border-color:#27304A;color:#FFFFFF}
+#root .outline-btn:hover{background:#151A30;border-color:#B8860B}
+#root .hero-poster:before{border-color:rgba(184, 134, 11, .6)}
+#root .hero-poster span{background:#B8860B;color:#FFFFFF}
+#root .hero-controls>button{background:#151A30;border-color:#27304A;color:#FFFFFF}
+#root .hero-controls>button:hover{background:#B8860B;border-color:#B8860B;color:#FFFFFF}
+#root .hero-dots button.on{background:#B8860B}
+#root .slide-count{color:#CBD5E1}
+#root .poster-wrap{background:#151A30;border-color:#27304A}
+#root .poster-overlay{background:linear-gradient(0deg,rgba(8,11,24,.95),transparent)}
+#root .rating-chip{background:#151A30;border-color:#27304A;color:#F59E0B}
+#root .quick-book{border-color:#B8860B}
+#root .card-duration{color:#FFFFFF}
+#root .movie-info p i{background:#EC4899}
+#root .filter-bar,#root .filter-bar label{border-color:#27304A;background:#151A30;color:#CBD5E1}
+#root .filter-bar select,#root .filter-bar option{color:#FFFFFF;background:#151A30}
+#root .filter-bar select:focus{border-color:#B8860B;box-shadow:0 0 0 3px rgba(184, 134, 11, .2);outline-color:#B8860B}
+#root .result-count,#root .empty-state{color:#94A3B8}
+#root .empty-state{border-color:#27304A}
+#root .category-card{background:#151A30;border-color:#27304A;color:#FFFFFF}
+#root .category-card:hover{border-color:#B8860B}
+#root .category-card>span{border-color:rgba(184, 134, 11, .4);background:linear-gradient(145deg,rgba(184, 134, 11, .2),rgba(184, 134, 11, .07));color:#EC4899}
+#root .category-card:hover>span{border-color:rgba(184, 134, 11, .55)}
+#root .category-card>i{color:#CBD5E1}
+#root .action,#root .comedy,#root .romance,#root .drama,#root .thriller,#root .horror,#root .animation,#root .adventure{--accent:#B8860B;--glow:#B8860B}
+#root .theatre-section{background:#0D1124;border-color:#27304A}
+#root .theatre-card{background:#151A30;border-color:#27304A}
+#root .theatre-card:hover{background:#151A30;border-color:#B8860B}
+#root .theatre-avatar{background:rgba(184, 134, 11, .12);border-color:rgba(184, 134, 11, .35);color:#EC4899}
+#root .theatre-detail div span,#root .theatre-arrow{color:#F59E0B}
+#root .theatre-detail div i{border-color:#27304A}
+#root .offer-card{background:#151A30;border-color:#27304A}
+#root .offer-0,#root .offer-1,#root .offer-2,#root .offer-3{--offer-glow:#B8860B;background:linear-gradient(135deg,#151A30,#0D1124 75%)}
+#root .offer-card:hover{border-color:#B8860B}
+#root .offer-top b{border-color:#27304A}
+#root .seat-footer{background:#0D1124;border-color:#27304A;color:#FFFFFF}
+#root .site-footer,#root .footer-variant-one,#root .footer-variant-two,#root .footer-variant-three{background:#0D1124;color:#FFFFFF}
+#root .footer-brand,#root .footer-title{color:#FFFFFF}
+#root .footer-brand-mark{background:#B8860B}
+#root .footer-eyebrow{background:rgba(184, 134, 11, .16);color:#EC4899}
+#root .footer-text,#root .footer-contact-list,#root .footer-links a,#root .footer-socials a,#root .footer-bottom-links a{color:#CBD5E1}
+#root .footer-links a:hover,#root .footer-socials a:hover,#root .footer-bottom-links a:hover{color:#EC4899}
+#root .footer-card{border-color:#27304A;background:#151A30}
+#root .footer-subscribe .form-control{border-color:#27304A;background:#151A30;color:#FFFFFF}
+#root .footer-subscribe .form-control::placeholder{color:#94A3B8}
+#root .footer-subscribe .form-control:focus{border-color:#B8860B;background:#151A30;color:#FFFFFF;box-shadow:0 0 0 .25rem rgba(184, 134, 11, .2)}
+#root .footer-about .brand,#root .footer-about>p{color:#FFFFFF}
+#root .footer-about .brand small,#root .footer-col>a,#root .footer-social p,#root .footer-bottom{color:#CBD5E1}
+#root .footer-note,#root .footer-col>b,#root .footer-social>b{color:#EC4899}
+#root .footer-note i,#root .footer-bottom i{color:#B8860B}
+#root .footer-social>div a{border-color:#27304A;color:#CBD5E1}
+#root .footer-social>div a:hover{background:#B8860B;border-color:#B8860B;color:#FFFFFF}
+#root .footer-bottom{border-color:#27304A}
+#root .toast-message{background:#151A30;border-color:#B8860B;color:#FFFFFF}
+#root .toast-message span{color:#EC4899}
 
-.footer-variant-two {
-  background: linear-gradient(135deg, #0d6efd 0%, #1d4ed8 50%, #0f172a 100%);
-}
+/* Shared controls and registration/login pages. */
+#root .register-page{--reg-bg:#080B18;--reg-panel:#0D1124;--reg-card:#151A30;--reg-border:#27304A;--reg-text:#FFFFFF;--reg-muted:#94A3B8;--reg-purple:#B8860B;--reg-pink:#EC4899;background:#080B18;color:#FFFFFF}
+#root .register-story{background:#0D1124}
+#root .story-backdrop:after{background:linear-gradient(90deg,rgba(8,11,24,.96),rgba(13,17,36,.86) 58%,rgba(8,11,24,.78)),linear-gradient(0deg,#080B18 0%,transparent 48%,rgba(8,11,24,.24))}
+#root .register-brand,#root .story-copy h1,#root .register-heading h2{color:#FFFFFF}
+#root .register-brand small,#root .story-copy p,#root .story-bottom,#root .register-heading p,#root .login-prompt{color:#CBD5E1}
+#root .story-kicker,#root .form-eyebrow{color:#EC4899}
+#root .story-kicker i{background:#B8860B}
+#root .story-copy h1 em{background:linear-gradient(100deg,#B8860B,#EC4899);background-clip:text;-webkit-background-clip:text;color:transparent}
+#root .story-bottom i{border-color:#B8860B}
+#root .register-panel{background:radial-gradient(ellipse at 95% 8%,rgba(184, 134, 11, .14),transparent 38%),#080B18}
+#root .register-card,#root .login-card{border-color:#27304A;background:#151A30}
+#root .register-field>label,#root .terms-row>label,#root .remember-option{color:#CBD5E1}
+#root .register-field>label span{color:#EC4899}
+#root .register-field>input,#root .password-control,#root .password-control input,#root .remember-option input{border-color:#27304A;background:#0D1124;color:#FFFFFF}
+#root .register-field>input::placeholder,#root .password-control input::placeholder{color:#94A3B8}
+#root .register-field>input:hover,#root .password-control:hover{border-color:#B8860B}
+#root .register-field>input:focus,#root .password-control:focus-within{border-color:#B8860B;background:#0D1124;box-shadow:0 0 0 3px rgba(184, 134, 11, .2)}
+#root .visibility-toggle{color:#94A3B8}
+#root .visibility-toggle:hover{color:#EC4899;background:rgba(184, 134, 11, .12)}
+#root .field-error,#root .terms-error{color:#EF4444}
+#root .password-strength{color:#94A3B8}
+#root .strength-track i{background:#27304A}
+#root .strength-track.weak i:first-child{background:#EF4444}
+#root .password-strength>b.weak{color:#EF4444}
+#root .strength-track.medium i:nth-child(-n+2){background:#F59E0B}
+#root .password-strength>b.medium{color:#F59E0B}
+#root .strength-track.strong i{background:#22C55E}
+#root .password-strength>b.strong{color:#22C55E}
+#root .terms-row>input{border-color:#27304A;background:#0D1124}
+#root .terms-row>input:checked,#root .remember-option input:checked{border-color:#B8860B;background:#B8860B;box-shadow:inset 0 0 0 3px #151A30}
+#root .terms-row a,#root .login-prompt a,#root .login-options>a{color:#EC4899;border-color:rgba(236,72,153,.5)}
+#root .terms-row a:hover,#root .login-prompt a:hover,#root .login-options>a:hover{color:#FFFFFF}
+#root .register-success{border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.12);color:#22C55E}
+#root .register-legal{border-color:#27304A;color:#94A3B8}
+#root .register-legal span{color:#CBD5E1}
+#root .login-options>a{color:#EC4899}
+#root .remember-option input:focus-visible{outline-color:#B8860B}
 
-.footer-variant-three {
-  background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
-}
+/* Movie Details, Showtimes, and Seat Selection pages. */
+#root .movie-details-page,#root .showtimes-page,#root .seat-selection-page{background:#080B18;color:#FFFFFF}
+#root .details-backdrop:after{background:linear-gradient(90deg,rgba(8,11,24,.9),rgba(8,11,24,.76) 42%,rgba(8,11,24,.56)),linear-gradient(0deg,#080B18 0%,rgba(8,11,24,.94) 2%,rgba(8,11,24,.2) 39%,rgba(8,11,24,.25) 100%)}
+#root .details-breadcrumb,#root .details-meta{color:#CBD5E1}
+#root .details-poster{background:#151A30}
+#root .details-breadcrumb a{color:#94A3B8}
+#root .details-breadcrumb b,#root .details-copy,#root .details-copy h1{color:#FFFFFF}
+#root .details-eyebrow,#root .details-rating button,#root .rating-star,#root .details-facts span{color:#EC4899}
+#root .details-eyebrow:before,#root .details-meta i{background:#B8860B}
+#root .details-rating strong{color:#FFFFFF}
+#root .details-rating strong small,#root .rating-votes{color:#CBD5E1}
+#root .rating-votes{border-color:#27304A}
+#root .details-rating button{border-color:rgba(184, 134, 11, .45);background:rgba(184, 134, 11, .12)}
+#root .details-rating button:hover{border-color:#B8860B;background:rgba(184, 134, 11, .22)}
+#root .format-badges span,#root .language-badge{border-color:#27304A;background:#151A30;color:#CBD5E1}
+#root .language-badge{border-color:rgba(184, 134, 11, .5);background:rgba(184, 134, 11, .15);color:#EC4899}
+#root .details-blurb{color:#CBD5E1}
+#root .share-button{border-color:#27304A;background:#151A30;color:#FFFFFF}
+#root .share-button:hover{border-color:#B8860B;background:#0D1124;color:#FFFFFF}
+#root .share-button svg{stroke:#EC4899}
+#root .details-about{border-color:#27304A}
+#root .details-about>p{color:#CBD5E1}
+#root .details-facts strong{color:#FFFFFF}
+#root .movie-not-found{background:#080B18}
+#root .movie-not-found h1{color:#FFFFFF}
+#root .movie-not-found .section-kicker{color:#EC4899}
+#root .movie-not-found p{color:#CBD5E1}
+#root .trailer-modal-backdrop{background:rgba(8,11,24,.78)}
+#root .trailer-modal{border-color:#27304A;background:#151A30}
+#root .modal-close{background:#0D1124;color:#CBD5E1}
+#root .modal-play{background:#B8860B;color:#FFFFFF}
+#root .trailer-modal h2{color:#FFFFFF}
+#root .trailer-modal p{color:#CBD5E1}
+#root .showtimes-back{color:#CBD5E1}
+#root .showtimes-back:hover{color:#EC4899}
+#root .showtimes-movie-heading,#root .showtimes-date-section,#root .showtimes-filters,#root .showtimes-theatre,#root .showtimes-empty,#root .showtimes-selection{border-color:#27304A;background:#151A30}
+#root .showtimes-poster{background:#0D1124}
+#root .showtimes-movie-copy .section-kicker,#root .showtimes-section-top .section-kicker,#root .showtimes-listing-top .section-kicker,#root .showtimes-selection .section-kicker{color:#EC4899}
+#root .showtimes-movie-copy h1,#root .showtimes-section-top h2,#root .showtimes-listing-top h2,#root .theatre-title h3,#root .showtimes-empty h3,#root .showtimes-not-found h1{color:#FFFFFF}
+#root .showtimes-metadata,#root .showtimes-movie-copy>p,#root .showtimes-listing-top h2 span,#root .theatre-title>p,#root .showtimes-empty p,#root .showtimes-not-found p{color:#CBD5E1}
+#root .showtimes-metadata i{background:#B8860B}
+#root .showtimes-metadata b,#root .showtimes-city{border-color:#27304A;background:#0D1124;color:#CBD5E1}
+#root .showtimes-city span{color:#94A3B8}
+#root .showtimes-city strong{color:#FFFFFF}
+#root .showtimes-month{color:#94A3B8}
+#root .showtimes-date{border-color:#27304A;background:#0D1124;color:#CBD5E1}
+#root .showtimes-date:hover{border-color:#B8860B}
+#root .showtimes-date strong{color:#FFFFFF}
+#root .showtimes-date.is-active{border-color:#B8860B;background:#B8860B;color:#FFFFFF;box-shadow:0 4px 12px rgba(184, 134, 11, .25)}
+#root .showtimes-date.is-active strong{color:#FFFFFF}
+#root .showtimes-filters>label:not(.showtimes-cancel-filter){color:#94A3B8}
+#root .showtimes-filters select{border-color:#27304A;background:#0D1124;color:#FFFFFF}
+#root .showtimes-filters select:focus{border-color:#B8860B;box-shadow:0 0 0 3px rgba(184, 134, 11, .2)}
+#root .showtimes-filters option{background:#151A30;color:#FFFFFF}
+#root .showtimes-cancel-filter{color:#CBD5E1}
+#root .showtimes-cancel-filter input{accent-color:#B8860B}
+#root .showtimes-quick-filters button{border-color:#27304A;background:#0D1124;color:#CBD5E1}
+#root .showtimes-quick-filters button:hover,#root .showtimes-quick-filters button.is-active{border-color:#B8860B;background:rgba(184, 134, 11, .18);color:#FFFFFF}
+#root .showtimes-legend{color:#94A3B8}
+#root .legend-available{background:#22C55E}
+#root .legend-fast{background:#F59E0B}
+#root .legend-sold{background:#64748B}
+#root .showtimes-theatre:hover{border-color:#B8860B}
+#root .theatre-logo{border-color:#27304A;background:#0D1124;color:#EC4899}
+#root .theatre-badges span{background:#0D1124;color:#94A3B8}
+#root .theatre-badges .cancel-yes{background:rgba(34,197,94,.12);color:#22C55E}
+#root .theatre-badges .cancel-no{background:#0D1124;color:#94A3B8}
+#root .theatre-favorite{border-color:#27304A;background:#0D1124;color:#94A3B8}
+#root .theatre-favorite:hover,#root .theatre-favorite.is-favorite{border-color:rgba(236,72,153,.45);background:rgba(236,72,153,.12);color:#EC4899}
+#root .theatre-showtimes{border-color:#27304A}
+#root .showtime-choice{border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.08);color:#22C55E}
+#root .showtime-choice>span{color:#CBD5E1}
+#root .showtime-choice small{color:#22C55E}
+#root .showtime-choice.show-fast-filling{border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.09);color:#F59E0B}
+#root .showtime-choice.show-fast-filling small{color:#F59E0B}
+#root .showtime-choice.show-sold-out{border-color:#27304A;background:#0D1124;color:#64748B}
+#root .showtime-choice.show-sold-out small{color:#64748B}
+#root .showtime-choice.is-selected{border-color:#B8860B;background:rgba(184, 134, 11, .2);color:#FFFFFF}
+#root .showtimes-empty{border-color:#27304A}
+#root .showtimes-empty>span{color:#EC4899}
+#root .showtimes-empty button{border-color:#B8860B;background:#0D1124;color:#FFFFFF}
+#root .showtimes-selection{box-shadow:0 14px 40px rgba(0,0,0,.4)}
+#root .showtimes-selection strong{color:#FFFFFF}
+#root .showtimes-selection>div>span:last-child{color:#CBD5E1}
+#root .showtimes-selection .primary-btn{border-color:#B8860B;background:#B8860B;color:#FFFFFF}
+#root .showtimes-not-found .section-kicker{color:#EC4899}
 
-.footer-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: #ffffff;
-}
+#root .seat-booking-heading,#root .seat-map-card,#root .selected-seats-card,#root .seat-price-card{border-color:#27304A;background:#151A30}
+#root .seat-back-link{color:#CBD5E1}
+#root .seat-back-link:hover{color:#EC4899}
+#root .seat-booking-top,#root .seat-price-card .seat-total{border-color:#27304A}
+#root .ticket-count-label,#root .seat-movie-info>p,#root .seat-show-meta,#root .seat-map-topline p,#root .seat-category-key span,#root .seat-legend,#root .selected-seats-card small,#root .seat-price-card>div{color:#CBD5E1}
+#root .ticket-count-label select,#root .seat-zoom-controls,#root .seat-zoom-controls button,#root .seat-category-key span,#root .seat-row-label{border-color:#27304A;background:#0D1124;color:#CBD5E1}
+#root .ticket-count-label select:focus{outline-color:#B8860B}
+#root .seat-movie-mark{border-color:#27304A;background:rgba(184, 134, 11, .15);color:#EC4899}
+#root .seat-movie-info .section-kicker,#root .seat-map-topline .section-kicker,#root .selected-seats-card .section-kicker,#root .seat-price-card .section-kicker,#root .seat-sticky-info .section-kicker{color:#EC4899}
+#root .seat-movie-info h1,#root .seat-map-topline h2,#root .selected-seats-card h2,#root .seat-price-card>div strong,#root .seat-sticky-info strong,#root .seat-sticky-total strong{color:#FFFFFF}
+#root .ticket-count-badge{border-color:rgba(184, 134, 11, .4);background:rgba(184, 134, 11, .14);color:#FFFFFF}
+#root .seat-category-key .category-premium{border-color:rgba(184, 134, 11, .45);background:rgba(184, 134, 11, .14);color:#FFFFFF}
+#root .seat-category-key .category-gold{border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.1);color:#F59E0B}
+#root .seat-category-key .category-executive{border-color:#27304A;background:#0D1124;color:#CBD5E1}
+#root .seat-category-key b{color:#FFFFFF}
+#root .seat-row-label{box-shadow:4px 0 7px #151A30}
+#root .cinema-seat.seat-available{border-color:#27304A;background:#0D1124;color:#CBD5E1}
+#root .cinema-seat.seat-available.seat-category-premium{border-color:rgba(184, 134, 11, .55);background:rgba(184, 134, 11, .12);color:#FFFFFF}
+#root .cinema-seat.seat-available.seat-category-gold{border-color:rgba(245,158,11,.5);background:rgba(245,158,11,.1);color:#F59E0B}
+#root .cinema-seat.seat-available.seat-category-executive{border-color:#27304A;background:#0D1124;color:#CBD5E1}
+#root .cinema-seat.seat-bestseller{border-color:#F59E0B;background:rgba(245,158,11,.15);color:#F59E0B}
+#root .cinema-seat.seat-selected{border-color:#F59E0B;background:#F59E0B;color:#080B18}
+#root .cinema-seat.seat-sold{border-color:#27304A;background:#151A30;color:#64748B}
+#root .seat-screen{border-color:#B8860B;background:linear-gradient(180deg,rgba(184, 134, 11, .18),transparent);color:#CBD5E1}
+#root .seat-legend-available{border-color:#CBD5E1!important;background:#0D1124}
+#root .seat-legend-sold{border-color:#27304A!important;background:#151A30}
+#root .seat-legend-best{border-color:#F59E0B!important;background:rgba(245,158,11,.15)}
+#root .seat-legend-selected{border-color:#F59E0B!important;background:#F59E0B}
+#root .selected-seats-card p,#root .seat-price-card .seat-total strong{color:#FFFFFF}
+#root .seat-sticky-summary{border-color:#27304A;background:rgba(13,17,36,.97)}
+#root .seat-sticky-total,#root .seat-not-found p{color:#94A3B8}
+#root .seat-continue-button:disabled{border-color:#27304A;background:#27304A;color:#94A3B8}
+#root .seat-not-found .section-kicker{color:#EC4899}
+#root .seat-not-found h1{color:#FFFFFF}
+#root .seat-not-found .primary-btn{border-color:#B8860B;background:#B8860B;color:#FFFFFF}
 
-.footer-brand-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #0d6efd, #20c997);
-  box-shadow: 0 12px 25px rgba(13, 110, 253, 0.28);
-}
+/* Shared input contrast and semantic feedback colors. */
+#root .register-field>input::placeholder,#root .password-control input::placeholder,#root .form-control::placeholder{color:#94A3B8}
+#root .form-control{border-color:#27304A;background-color:#0D1124;color:#FFFFFF}
+#root .form-control:focus{border-color:#B8860B;background-color:#0D1124;color:#FFFFFF;box-shadow:0 0 0 .2rem rgba(184, 134, 11, .2);outline-color:#B8860B}
+#root .status-success,#root .success{color:#22C55E}
+#root .status-error,#root .error{color:#EF4444}
+#root .seat-available,#root .available-seat{border-color:#22C55E;color:#22C55E}
+#root .seat-booked,#root .booked-seat,#root .seat-unavailable{border-color:#EF4444;background-color:#EF4444;color:#FFFFFF}
+#root .seat-selected{border-color:#F59E0B;background:#F59E0B;color:#080B18}
 
-.footer-title {
-  margin-bottom: 1rem;
-  color: #ffffff;
-  font-size: 1rem;
-  font-weight: 700;
-}
+/* Light theme palette with gradient reserved for existing primary actions. */
+body{background:#F6F7FB;color:#192132}
+#root .seatify-app{--bg:#F6F7FB;--panel:#FFFFFF;--muted:#64748B;--text:#192132;background:#F6F7FB;color:#192132}
+#root .seat-header{--header-bg:rgba(255,255,255,.97);background:#FFFFFF;border-color:#E2E8F0}
+#root .seat-header.scrolled{--header-bg:rgba(255,255,255,.98);border-bottom-color:#E2E8F0}
+#root .seat-header:before{background:rgba(184, 134, 11, .05)}
+#root .seat-header .brand,#root .seat-header .brand-seat{color:#192132}
+#root .seat-header .brand-ify{color:#B8860B}
+#root .seat-header .brand small,#root .seat-header .city-picker,#root .seat-header .nav-note{color:#475569}
+#root .seat-header .search-box{background:#F6F7FB;border-color:#E2E8F0;color:#475569}
+#root .seat-header .search-box input{color:#192132}
+#root .seat-header .search-box input::placeholder,#root .seat-header .search-box kbd{color:#64748B}
+#root .seat-header .search-box kbd{border-color:#E2E8F0;background:#FFFFFF}
+#root .seat-header .search-box:focus-within{border-color:#B8860B;background:#FFFFFF;box-shadow:0 0 0 4px rgba(184, 134, 11, .12)}
+#root .seat-header .search-box:focus-within .seat-icon,#root .seat-header .city-picker>.seat-icon{color:#B8860B}
+#root .seat-header .city-picker:hover{background:rgba(184, 134, 11, .06);border-color:rgba(184, 134, 11, .18);color:#192132}
+#root .seat-header .city-picker option{background:#FFFFFF;color:#192132}
+#root .seat-header .city-picker>span{color:#64748B}
+#root .seat-header .city-picker:hover>span{color:#B8860B}
+#root .seat-header .sign-in,#root .seatify-app .primary-btn,#root .seatify-app .quick-book,#root .register-page .create-account,#root .seat-continue-button{background:linear-gradient(90deg,#F59E0B 0%,#EC4899 100%);color:#FFFFFF}
+#root .seat-header .sign-in:hover,#root .seatify-app .primary-btn:hover,#root .seatify-app .quick-book:hover,#root .register-page .create-account:hover,#root .seat-continue-button:hover:not(:disabled){background:linear-gradient(90deg,#D97706 0%,#DB2777 100%);color:#FFFFFF}
+#root .seat-header .nav-row{border-top-color:#E2E8F0}
+#root .seat-header .nav-links a{color:#475569}
+#root .seat-header .nav-links a:hover{background:#F6F7FB;color:#192132}
+#root .seat-header .nav-links a.selected{color:#192132}
+#root .seat-header .nav-links a.selected:after{background:#192132}
+#root .seat-header .nav-note i,#root .seat-header .menu-toggle span{background:#B8860B}
+#root .seat-header .menu-toggle:hover{background:#F6F7FB}
+#root .seat-header :focus-visible{outline-color:#B8860B}
 
-.footer-eyebrow {
-  display: inline-block;
-  padding: 0.4rem 0.9rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.12);
-  color: #ffffff;
-  font-size: 0.85rem;
-  font-weight: 600;
-}
+#root .hero-shell{background:#F6F7FB}
+#root .hero-backdrop:after{background:linear-gradient(90deg,rgba(246,247,251,.96),rgba(246,247,251,.9) 45%,rgba(246,247,251,.76)),linear-gradient(0deg,#F6F7FB 0%,transparent 42%,rgba(246,247,251,.4) 100%)}
+#root .hero-shade{background:radial-gradient(ellipse at 76% 38%,rgba(184, 134, 11, .06),transparent 40%)}
+#root .hero-copy h1,#root .hero-rating,#root .section-heading h2,#root .movie-info h3,#root .theatre-detail h3,#root .offer-card h3{color:#192132}
+#root .hero-meta,#root .hero-copy>p,#root .movie-info p,#root .theatre-detail p,#root .theatre-detail div,#root .offer-card p,#root .offer-card>small{color:#475569}
+#root .eyebrow,#root .section-kicker,#root .hero-rating small,#root .hero-vertical,#root .offer-top span,#root .offer-card button{color:#B8860B}
+#root .hero-copy .eyebrow{color:#192132}
+#root .hero-rating>span,#root .rating-chip{color:#F59E0B}
+#root .hero-meta b,#root .play-icon,#root .section-heading h2 span,#root .text-link b{color:#B8860B}
+#root .text-link{color:#B8860B!important}
+#root .hero-rating i,#root .slide-count i,#root .hero-vertical{border-color:#E2E8F0}
+#root .outline-btn{background:rgba(255,255,255,.9);border-color:#CBD5E1;color:#192132}
+#root .outline-btn:hover{background:#FFFFFF;border-color:#B8860B}
+#root .hero-poster:before{border-color:rgba(184, 134, 11, .4)}
+#root .hero-poster span{background:#B8860B;color:#FFFFFF}
+#root .hero-controls>button{background:rgba(255,255,255,.92);border-color:#CBD5E1;color:#192132}
+#root .hero-controls>button:hover{background:#B8860B;border-color:#B8860B;color:#FFFFFF}
+#root .hero-dots button.on{background:#B8860B}
+#root .slide-count{color:#475569}
+#root .poster-wrap{background:#FFFFFF;border-color:#E2E8F0}
+#root .poster-overlay{background:linear-gradient(0deg,rgba(8,11,24,.82),transparent)}
+#root .rating-chip{background:#FFFFFF;border-color:#E2E8F0}
+#root .card-duration{color:#FFFFFF}
+#root .filter-bar,#root .filter-bar label{border-color:#E2E8F0;background:#FFFFFF;color:#475569}
+#root .filter-bar select,#root .filter-bar option{color:#192132;background:#FFFFFF}
+#root .filter-bar select:focus{border-color:#B8860B;box-shadow:0 0 0 3px rgba(184, 134, 11, .12);outline-color:#B8860B}
+#root .result-count,#root .empty-state{color:#64748B}
+#root .empty-state{border-color:#E2E8F0}
+#root .category-card{background:#FFFFFF;border-color:#E2E8F0;color:#192132}
+#root .category-card:hover{border-color:#B8860B}
+#root .category-card>span{border-color:rgba(184, 134, 11, .2);background:linear-gradient(145deg,rgba(184, 134, 11, .09),rgba(184, 134, 11, .03));color:#B8860B}
+#root .category-card>i{color:#64748B}
+#root .action,#root .comedy,#root .romance,#root .drama,#root .thriller,#root .horror,#root .animation,#root .adventure{--accent:#B8860B;--glow:#B8860B}
+#root .theatre-section{background:#EEF1F7;border-color:#E2E8F0}
+#root .theatre-card{background:#FFFFFF;border-color:#E2E8F0}
+#root .theatre-card:hover{background:#FFFFFF;border-color:#B8860B}
+#root .theatre-avatar{background:rgba(184, 134, 11, .06);border-color:rgba(184, 134, 11, .2);color:#B8860B}
+#root .theatre-detail div span,#root .theatre-arrow{color:#B8860B}
+#root .theatre-detail div i{border-color:#E2E8F0}
+#root .offer-card{background:#FFFFFF;border-color:#E2E8F0}
+#root .offer-0,#root .offer-1,#root .offer-2,#root .offer-3{--offer-glow:#B8860B;background:linear-gradient(135deg,#FFFFFF,#F6F7FB 75%)}
+#root .offer-card:hover{border-color:#B8860B}
+#root .offer-top b{border-color:#E2E8F0}
+#root .seat-footer,#root .site-footer,#root .footer-variant-one,#root .footer-variant-two,#root .footer-variant-three{background:#EEF1F7;border-color:#E2E8F0;color:#192132}
+#root .footer-about .brand,#root .footer-about>p,#root .footer-brand,#root .footer-title{color:#192132}
+#root .footer-about .brand small,#root .footer-col>a,#root .footer-social p,#root .footer-text,#root .footer-contact-list,#root .footer-links a,#root .footer-socials a,#root .footer-bottom-links a,#root .footer-bottom{color:#475569}
+#root .footer-note,#root .footer-col>b,#root .footer-social>b{color:#B8860B}
+#root .footer-note i,#root .footer-bottom i{color:#B8860B}
+#root .footer-social>div a{border-color:#CBD5E1;color:#475569}
+#root .footer-social>div a:hover{background:#B8860B;border-color:#B8860B;color:#FFFFFF}
+#root .footer-bottom{border-color:#E2E8F0}
+#root .footer-brand-mark{background:#B8860B}
+#root .footer-eyebrow{background:rgba(184, 134, 11, .08);color:#B8860B}
+#root .footer-card{border-color:#E2E8F0;background:#FFFFFF}
+#root .footer-subscribe .form-control{border-color:#E2E8F0;background:#FFFFFF;color:#192132}
+#root .footer-subscribe .form-control::placeholder{color:#64748B}
+#root .footer-subscribe .form-control:focus{border-color:#B8860B;background:#FFFFFF;color:#192132;box-shadow:0 0 0 .25rem rgba(184, 134, 11, .12)}
+#root .toast-message{background:#FFFFFF;border-color:#B8860B;color:#192132}
+#root .toast-message span{color:#B8860B}
 
-.footer-hero {
-  color: #ffffff;
-  font-size: clamp(2rem, 4vw, 3.25rem);
-  line-height: 1.1;
-  font-weight: 800;
-}
+#root .register-page{--reg-bg:#F6F7FB;--reg-panel:#F6F7FB;--reg-card:#FFFFFF;--reg-border:#E2E8F0;--reg-text:#192132;--reg-muted:#64748B;--reg-purple:#B8860B;--reg-pink:#EC4899;background:#F6F7FB;color:#192132}
+#root .register-story{background:#EEF1F7}
+#root .story-backdrop:after{background:linear-gradient(90deg,rgba(246,247,251,.96),rgba(246,247,251,.9) 58%,rgba(246,247,251,.82)),linear-gradient(0deg,#F6F7FB 0%,transparent 48%,rgba(255,255,255,.25))}
+#root .register-brand,#root .story-copy h1,#root .register-heading h2{color:#192132}
+#root .register-brand small,#root .story-copy p,#root .story-bottom,#root .register-heading p,#root .login-prompt{color:#475569}
+#root .story-kicker,#root .form-eyebrow{color:#B8860B}
+#root .story-kicker i{background:#B8860B}
+#root .story-copy h1 em{background:linear-gradient(100deg,#B8860B,#EC4899);background-clip:text;-webkit-background-clip:text;color:transparent}
+#root .story-bottom i{border-color:#B8860B}
+#root .register-panel{background:radial-gradient(ellipse at 95% 8%,rgba(184, 134, 11, .06),transparent 38%),#F6F7FB}
+#root .register-card,#root .login-card{border-color:#E2E8F0;background:#FFFFFF}
+#root .register-field>label,#root .terms-row>label,#root .remember-option{color:#334155}
+#root .register-field>label span{color:#EC4899}
+#root .register-field>input,#root .password-control,#root .password-control input,#root .remember-option input{border-color:#CBD5E1;background:#FFFFFF;color:#192132}
+#root .register-field>input::placeholder,#root .password-control input::placeholder{color:#64748B}
+#root .register-field>input:hover,#root .password-control:hover{border-color:#B8860B}
+#root .register-field>input:focus,#root .password-control:focus-within{border-color:#B8860B;background:#FFFFFF;box-shadow:0 0 0 3px rgba(184, 134, 11, .12)}
+#root .visibility-toggle{color:#64748B}
+#root .visibility-toggle:hover{color:#B8860B;background:rgba(184, 134, 11, .06)}
+#root .field-error,#root .terms-error{color:#EF4444}
+#root .password-strength{color:#64748B}
+#root .strength-track i{background:#E2E8F0}
+#root .strength-track.weak i:first-child{background:#EF4444}
+#root .password-strength>b.weak{color:#EF4444}
+#root .strength-track.medium i:nth-child(-n+2){background:#F59E0B}
+#root .password-strength>b.medium{color:#F59E0B}
+#root .strength-track.strong i{background:#22C55E}
+#root .password-strength>b.strong{color:#22C55E}
+#root .terms-row>input{border-color:#CBD5E1;background:#FFFFFF}
+#root .terms-row>input:checked,#root .remember-option input:checked{border-color:#B8860B;background:#B8860B;box-shadow:inset 0 0 0 3px #FFFFFF}
+#root .terms-row a,#root .login-prompt a,#root .login-options>a{color:#B8860B;border-color:rgba(184, 134, 11, .35)}
+#root .terms-row a:hover,#root .login-prompt a:hover,#root .login-options>a:hover{color:#B8860B}
+#root .register-success{border-color:rgba(34,197,94,.35);background:#ECFDF3;color:#15803D}
+#root .register-legal{border-color:#E2E8F0;color:#64748B}
+#root .register-legal span{color:#475569}
+#root .remember-option input:focus-visible{outline-color:#B8860B}
 
-.footer-text {
-  color: #cbd5e1;
-  line-height: 1.7;
-}
+#root .movie-details-page,#root .showtimes-page,#root .seat-selection-page{background:#F6F7FB;color:#192132}
+#root .details-backdrop:after{background:linear-gradient(90deg,rgba(246,247,251,.96),rgba(246,247,251,.9) 42%,rgba(246,247,251,.78)),linear-gradient(0deg,#F6F7FB 0%,rgba(246,247,251,.94) 2%,rgba(246,247,251,.25) 39%,rgba(246,247,251,.38) 100%)}
+#root .details-breadcrumb,#root .details-meta,#root .details-copy{color:#334155}
+#root .details-breadcrumb a{color:#475569}
+#root .details-breadcrumb b,#root .details-copy h1,#root .details-rating strong{color:#192132}
+#root .details-eyebrow,#root .details-rating button,#root .details-facts span{color:#B8860B}
+#root .details-eyebrow:before,#root .details-meta i{background:#B8860B}
+#root .rating-star{color:#F59E0B}
+#root .details-rating strong small,#root .rating-votes{color:#64748B}
+#root .rating-votes{border-color:#CBD5E1}
+#root .details-rating button{border-color:rgba(184, 134, 11, .25);background:rgba(184, 134, 11, .06)}
+#root .details-rating button:hover{border-color:#B8860B;background:rgba(184, 134, 11, .12)}
+#root .details-poster{background:#FFFFFF}
+#root .format-badges span,#root .language-badge{border-color:#E2E8F0;background:rgba(255,255,255,.85);color:#475569}
+#root .language-badge{border-color:rgba(184, 134, 11, .25);background:rgba(184, 134, 11, .07);color:#B8860B}
+#root .details-blurb,#root .details-about>p{color:#475569}
+#root .share-button{border-color:#CBD5E1;background:rgba(255,255,255,.86);color:#192132}
+#root .share-button:hover{border-color:#B8860B;background:#FFFFFF;color:#192132}
+#root .share-button svg{stroke:#B8860B}
+#root .details-about{border-color:#E2E8F0}
+#root .details-facts strong{color:#192132}
+#root .movie-not-found{background:#F6F7FB}
+#root .movie-not-found h1{color:#192132}
+#root .movie-not-found .section-kicker{color:#B8860B}
+#root .movie-not-found p{color:#475569}
+#root .trailer-modal-backdrop{background:rgba(25,33,50,.42)}
+#root .trailer-modal{border-color:#E2E8F0;background:#FFFFFF}
+#root .modal-close{background:#F1F3F8;color:#475569}
+#root .modal-play{background:#B8860B;color:#FFFFFF}
+#root .trailer-modal h2{color:#192132}
+#root .trailer-modal p{color:#475569}
 
-.footer-links {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
+#root .showtimes-back{color:#475569}
+#root .showtimes-back:hover{color:#B8860B}
+#root .showtimes-movie-heading,#root .showtimes-date-section,#root .showtimes-filters,#root .showtimes-theatre,#root .showtimes-empty,#root .showtimes-selection{border-color:#E2E8F0;background:#FFFFFF}
+#root .showtimes-poster{background:#EEF1F7}
+#root .showtimes-movie-copy .section-kicker,#root .showtimes-section-top .section-kicker,#root .showtimes-listing-top .section-kicker,#root .showtimes-selection .section-kicker{color:#B8860B}
+#root .showtimes-movie-copy h1,#root .showtimes-section-top h2,#root .showtimes-listing-top h2,#root .theatre-title h3,#root .showtimes-empty h3,#root .showtimes-not-found h1{color:#192132}
+#root .showtimes-metadata,#root .showtimes-movie-copy>p,#root .showtimes-listing-top h2 span,#root .theatre-title>p,#root .showtimes-empty p,#root .showtimes-not-found p{color:#475569}
+#root .showtimes-metadata i{background:#B8860B}
+#root .showtimes-metadata b,#root .showtimes-city{border-color:#E2E8F0;background:#F6F7FB;color:#475569}
+#root .showtimes-city span,#root .showtimes-month{color:#64748B}
+#root .showtimes-city strong{color:#192132}
+#root .showtimes-date{border-color:#E2E8F0;background:#FFFFFF;color:#475569}
+#root .showtimes-date:hover{border-color:#B8860B}
+#root .showtimes-date strong{color:#192132}
+#root .showtimes-date.is-active{border-color:#B8860B;background:#B8860B;color:#FFFFFF;box-shadow:0 4px 12px rgba(184, 134, 11, .18)}
+#root .showtimes-date.is-active strong{color:#FFFFFF}
+#root .showtimes-filters>label:not(.showtimes-cancel-filter){color:#64748B}
+#root .showtimes-filters select{border-color:#CBD5E1;background:#FFFFFF;color:#192132}
+#root .showtimes-filters select:focus{border-color:#B8860B;box-shadow:0 0 0 3px rgba(184, 134, 11, .12)}
+#root .showtimes-filters option{background:#FFFFFF;color:#192132}
+#root .showtimes-cancel-filter{color:#475569}
+#root .showtimes-cancel-filter input{accent-color:#B8860B}
+#root .showtimes-quick-filters button{border-color:#E2E8F0;background:#FFFFFF;color:#475569}
+#root .showtimes-quick-filters button:hover,#root .showtimes-quick-filters button.is-active{border-color:#B8860B;background:rgba(184, 134, 11, .07);color:#B8860B}
+#root .showtimes-legend{color:#64748B}
+#root .legend-available{background:#22C55E}
+#root .legend-fast{background:#F59E0B}
+#root .legend-sold{background:#94A3B8}
+#root .showtimes-theatre:hover{border-color:#B8860B}
+#root .theatre-logo{border-color:#E2E8F0;background:#F6F7FB;color:#B8860B}
+#root .theatre-badges span{background:#F1F3F8;color:#64748B}
+#root .theatre-badges .cancel-yes{background:#ECFDF3;color:#15803D}
+#root .theatre-badges .cancel-no{background:#F1F3F8;color:#64748B}
+#root .theatre-favorite{border-color:#E2E8F0;background:#FFFFFF;color:#64748B}
+#root .theatre-favorite:hover,#root .theatre-favorite.is-favorite{border-color:rgba(236,72,153,.3);background:rgba(236,72,153,.07);color:#DB2777}
+#root .theatre-showtimes{border-color:#E2E8F0}
+#root .showtime-choice{border-color:rgba(34,197,94,.3);background:#F3FCF6;color:#15803D}
+#root .showtime-choice>span{color:#475569}
+#root .showtime-choice small{color:#15803D}
+#root .showtime-choice.show-fast-filling{border-color:rgba(245,158,11,.35);background:#FFFAEB;color:#B45309}
+#root .showtime-choice.show-fast-filling small{color:#B45309}
+#root .showtime-choice.show-sold-out{border-color:#E2E8F0;background:#F1F3F8;color:#94A3B8}
+#root .showtime-choice.show-sold-out small{color:#94A3B8}
+#root .showtime-choice.is-selected{border-color:#B8860B;background:rgba(184, 134, 11, .08);color:#B8860B}
+#root .showtimes-empty{border-color:#CBD5E1}
+#root .showtimes-empty>span{color:#B8860B}
+#root .showtimes-empty button{border-color:#B8860B;background:#FFFFFF;color:#B8860B}
+#root .showtimes-selection{box-shadow:0 14px 40px rgba(25,33,50,.14)}
+#root .showtimes-selection strong{color:#192132}
+#root .showtimes-selection>div>span:last-child{color:#475569}
+#root .showtimes-selection .primary-btn{border-color:#B8860B;background:linear-gradient(90deg,#F59E0B 0%,#EC4899 100%);color:#FFFFFF}
+#root .showtimes-not-found .section-kicker{color:#B8860B}
 
-.footer-links li + li {
-  margin-top: 0.75rem;
-}
+#root .seat-booking-heading,#root .seat-map-card,#root .selected-seats-card,#root .seat-price-card{border-color:#E2E8F0;background:#FFFFFF}
+#root .seat-back-link{color:#475569}
+#root .seat-back-link:hover{color:#B8860B}
+#root .seat-booking-top,#root .seat-price-card .seat-total{border-color:#E2E8F0}
+#root .ticket-count-label,#root .seat-movie-info>p,#root .seat-show-meta,#root .seat-map-topline p,#root .seat-category-key span,#root .seat-legend,#root .selected-seats-card small,#root .seat-price-card>div{color:#475569}
+#root .ticket-count-label select,#root .seat-zoom-controls,#root .seat-zoom-controls button,#root .seat-category-key span,#root .seat-row-label{border-color:#E2E8F0;background:#F6F7FB;color:#475569}
+#root .ticket-count-label select:focus{outline-color:#B8860B}
+#root .seat-movie-mark{border-color:rgba(184, 134, 11, .2);background:rgba(184, 134, 11, .07);color:#B8860B}
+#root .seat-movie-info .section-kicker,#root .seat-map-topline .section-kicker,#root .selected-seats-card .section-kicker,#root .seat-price-card .section-kicker,#root .seat-sticky-info .section-kicker{color:#B8860B}
+#root .seat-movie-info h1,#root .seat-map-topline h2,#root .selected-seats-card h2,#root .seat-price-card>div strong,#root .seat-sticky-info strong,#root .seat-sticky-total strong{color:#192132}
+#root .ticket-count-badge{border-color:rgba(184, 134, 11, .2);background:rgba(184, 134, 11, .07);color:#B8860B}
+#root .seat-category-key .category-premium{border-color:rgba(184, 134, 11, .22);background:rgba(184, 134, 11, .07);color:#B8860B}
+#root .seat-category-key .category-gold{border-color:rgba(245,158,11,.28);background:#FFFAEB;color:#B45309}
+#root .seat-category-key .category-executive{border-color:#E2E8F0;background:#F6F7FB;color:#475569}
+#root .seat-category-key b{color:#192132}
+#root .seat-row-label{box-shadow:4px 0 7px #FFFFFF}
+#root .cinema-seat.seat-available{border-color:#CBD5E1;background:#FFFFFF;color:#475569}
+#root .cinema-seat.seat-available.seat-category-premium{border-color:rgba(184, 134, 11, .4);background:rgba(184, 134, 11, .06);color:#B8860B}
+#root .cinema-seat.seat-available.seat-category-gold{border-color:rgba(245,158,11,.4);background:#FFFAEB;color:#B45309}
+#root .cinema-seat.seat-available.seat-category-executive{border-color:#CBD5E1;background:#FFFFFF;color:#475569}
+#root .cinema-seat.seat-bestseller{border-color:#F59E0B;background:#FFFAEB;color:#B45309}
+#root .cinema-seat.seat-selected{border-color:#F59E0B;background:#F59E0B;color:#080B18}
+#root .cinema-seat.seat-sold{border-color:#E2E8F0;background:#E2E8F0;color:#94A3B8}
+#root .seat-screen{border-color:#B8860B;background:linear-gradient(180deg,rgba(184, 134, 11, .1),transparent);color:#475569}
+#root .seat-legend-available{border-color:#CBD5E1!important;background:#FFFFFF}
+#root .seat-legend-sold{border-color:#E2E8F0!important;background:#E2E8F0}
+#root .seat-legend-best{border-color:#F59E0B!important;background:#FFFAEB}
+#root .seat-legend-selected{border-color:#F59E0B!important;background:#F59E0B}
+#root .selected-seats-card p,#root .seat-price-card .seat-total strong{color:#192132}
+#root .seat-sticky-summary{border-color:#E2E8F0;background:rgba(255,255,255,.97)}
+#root .seat-sticky-total,#root .seat-not-found p{color:#64748B}
+#root .seat-continue-button:disabled{border-color:#E2E8F0;background:#E2E8F0;color:#64748B}
+#root .seat-not-found .section-kicker{color:#B8860B}
+#root .seat-not-found h1{color:#192132}
 
-.footer-contact-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  color: #dbeafe;
-  line-height: 1.9;
-}
+/* Remove the extra outer focus ring while preserving the search field's existing border. */
+#root .seat-header .search-box:focus-within{box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+#root .seat-header .search-box input:focus-visible{outline:none}
 
-.footer-links a,
-.footer-socials a,
-.footer-bottom-links a {
-  color: #cbd5e1;
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-
-.footer-links a:hover,
-.footer-socials a:hover,
-.footer-bottom-links a:hover {
-  color: #ffffff;
-}
-
-.footer-subscribe .form-control {
-  min-height: 48px;
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  background: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
-}
-
-.footer-subscribe .form-control::placeholder {
-  color: #94a3b8;
-}
-
-.footer-subscribe .form-control:focus {
-  background: rgba(255, 255, 255, 0.12);
-  color: #ffffff;
-  border-color: rgba(96, 165, 250, 0.8);
-  box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.15);
-}
-
-.footer-socials {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.footer-card {
-  padding: 1.5rem;
-  border-radius: 1.25rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(148, 163, 184, 0.16);
-}
-
-.footer-bottom {
-  border-top: 1px solid rgba(148, 163, 184, 0.18);
-  color: #94a3b8;
-}
-
-/* Shared components and form controls use the same Seatify theme. */
-.site-footer,
-.footer-variant-one,
-.footer-variant-two,
-.footer-variant-three { background: #0B0B0B; color: #FFFFFF; }
-.footer-brand-mark { background: linear-gradient(135deg, #F5C518, #B8860B); box-shadow: 0 8px 20px #F5C51830; }
-.footer-eyebrow { background: #F5C51820; color: #FFD966; }
-.footer-title { color: #FFFFFF; }
-.footer-text,.footer-contact-list { color: #B3B3B3; }
-.footer-links a,.footer-socials a,.footer-bottom-links a { color: #B3B3B3; }
-.footer-links a:hover,.footer-socials a:hover,.footer-bottom-links a:hover { color: #FFD966; }
-.footer-card { background: #141414; border-color: #2A2A2A; }
-.footer-subscribe .form-control,.form-control,
-input:not([type="checkbox"]):not([type="radio"]),select,textarea {
-  background-color: #141414;
-  border-color: #2A2A2A;
-  color: #FFFFFF;
-}
-.footer-subscribe .form-control::placeholder,.form-control::placeholder,
-input::placeholder,textarea::placeholder { color: #B3B3B3; }
-.footer-subscribe .form-control:focus,.form-control:focus,
-input:focus,select:focus,textarea:focus {
-  background-color: #141414;
-  border-color: #F5C518;
-  color: #FFFFFF;
-  box-shadow: 0 0 0 0.2rem #F5C51830;
-  outline-color: #F5C518;
-}
-.seat-available,.available-seat { border-color: #22C55E; }
-.seat-booked,.booked-seat,.seat-unavailable { background-color: #EF4444; border-color: #EF4444; color: #FFFFFF; }
-.seat-selected { background: #F5C518; border-color: #F5C518; color: #0B0B0B; }
-.status-success { color: #22C55E; }
-.status-error { color: #EF4444; }
-
-/* Light palette for shared controls and components. */
-.site-footer,.footer-variant-one,.footer-variant-two,.footer-variant-three { background:#F5F3ED;color:#1B1915; }
-.footer-title,.footer-brand { color:#1B1915; }
-.footer-text,.footer-contact-list,.footer-links a,.footer-socials a,.footer-bottom-links a { color:#625F58; }
-.footer-links a:hover,.footer-socials a:hover,.footer-bottom-links a:hover { color:#8E681A; }
-.footer-card,.footer-subscribe .form-control,.form-control,
-input:not([type="checkbox"]):not([type="radio"]),select,textarea { background-color:#FFFFFF;border-color:#DED9CF;color:#1B1915; }
-.footer-subscribe .form-control::placeholder,.form-control::placeholder,input::placeholder,textarea::placeholder { color:#77736B; }
-.footer-subscribe .form-control:focus,.form-control:focus,input:focus,select:focus,textarea:focus { background-color:#FFFFFF;border-color:#B8860B;color:#1B1915;box-shadow:0 0 0 .2rem #B8860B25;outline-color:#B8860B; }
+/* Join the showtime date and filters into one compact panel. */
+#root .showtimes-control-panel{margin-top:20px;overflow:hidden;border:1px solid #E2E8F0;border-radius:13px;background:#FFFFFF;box-shadow:0 4px 14px rgba(0,0,0,.08)}
+#root .showtimes-control-panel .showtimes-date-section{display:flex;align-items:center;gap:14px;margin:0;padding:9px 12px;border:0;border-radius:0;background:transparent;box-shadow:none}
+#root .showtimes-control-panel .showtimes-section-top{flex:0 0 145px;align-items:flex-start;flex-direction:column;gap:0}
+#root .showtimes-control-panel .showtimes-dates{flex:1;gap:6px;margin:0}
+#root .showtimes-control-panel .showtimes-date{min-height:44px;gap:0;padding:3px 4px;border-radius:7px}
+#root .showtimes-control-panel .showtimes-date span{font-size:8px}
+#root .showtimes-control-panel .showtimes-date strong{font-size:16px}
+#root .showtimes-control-panel .showtimes-date.is-active{box-shadow:0 2px 6px rgba(0,0,0,.12)}
+#root .showtimes-control-panel .showtimes-filters{align-items:center;gap:7px;margin:0;padding:8px 12px;border:0;border-top:1px solid #E2E8F0;border-radius:0;background:transparent}
+#root .showtimes-control-panel .showtimes-filters>label:not(.showtimes-cancel-filter){gap:3px;min-width:100px;font-size:9px}
+#root .showtimes-control-panel .showtimes-filters select{height:29px;min-width:100px;padding:0 22px 0 8px;font-size:10px}
+#root .showtimes-control-panel .showtimes-cancel-filter{gap:5px;padding:0 2px;font-size:9px}
+@media(max-width:800px){#root .showtimes-control-panel .showtimes-date-section{align-items:stretch;flex-direction:column;gap:8px}#root .showtimes-control-panel .showtimes-section-top{flex:initial;flex-direction:row;align-items:center}#root .showtimes-control-panel .showtimes-dates{width:100%}}
+@media(max-width:560px){#root .showtimes-control-panel{margin-top:16px}#root .showtimes-control-panel .showtimes-date-section{padding:10px}#root .showtimes-control-panel .showtimes-section-top{align-items:flex-start;flex-direction:row}#root .showtimes-control-panel .showtimes-dates{gap:6px;margin:0 -2px;padding:2px 2px 6px}#root .showtimes-control-panel .showtimes-date{flex:0 0 50px;min-height:44px;padding:3px}#root .showtimes-control-panel .showtimes-date strong{font-size:15px}#root .showtimes-control-panel .showtimes-filters{margin:0;padding:8px;gap:7px}}
