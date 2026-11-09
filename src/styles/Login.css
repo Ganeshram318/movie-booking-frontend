@@ -1,0 +1,13 @@
+.login-page .login-card{width:min(100%,560px)}
+.login-page .login-grid{grid-template-columns:1fr;gap:19px}
+.login-page .login-heading{margin-bottom:25px}
+.login-options{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px}
+.remember-option{display:inline-flex;align-items:center;gap:9px;color:#514D45;font-size:14px;line-height:1.5;cursor:pointer}
+.remember-option input{appearance:none;width:15px;height:15px;margin:0;border:1px solid #B8B1A4;border-radius:4px;background:#fff;cursor:pointer;transition:background .18s,border-color .18s}
+.remember-option input:checked{border-color:#B8860B;background:#B8860B;box-shadow:inset 0 0 0 3px #fff}
+.remember-option input:focus-visible{outline:2px solid #B8860B;outline-offset:2px}
+.login-options>a{color:#8E681A;font-size:13px;font-weight:600;line-height:1.5;text-decoration:none}
+.login-options>a:hover{color:#6F5012;text-decoration:underline}
+.login-page .create-account{margin-top:23px}
+.login-page .login-prompt{margin-top:22px}
+@media(max-width:520px){.login-page .login-grid{gap:15px}.login-page .login-card{padding:22px 17px}.login-options{margin-top:16px}}

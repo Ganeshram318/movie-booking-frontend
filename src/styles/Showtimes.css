@@ -1,0 +1,132 @@
+.showtimes-page{min-height:100vh;background:#F5F3ED;color:#1B1915}
+.showtimes-main{max-width:1180px;margin:0 auto;padding:30px 42px 110px}
+.showtimes-back{display:inline-flex;align-items:center;gap:8px;margin:0 0 23px;color:#755716;font-size:14px;font-weight:600;transition:color .2s}
+.showtimes-back:hover{color:#B8860B}
+.showtimes-movie-heading{display:flex;align-items:center;gap:22px;padding:24px 26px;border:1px solid #E3DED2;border-radius:15px;background:#fff;box-shadow:0 8px 25px rgba(37,30,14,.045)}
+.showtimes-poster{flex:0 0 82px;width:82px;height:112px;overflow:hidden;border-radius:9px;background:#e8e4da;box-shadow:0 4px 12px #1b19151a}
+.showtimes-poster img{width:100%;height:100%;display:block;object-fit:cover}
+.showtimes-movie-copy{min-width:0;flex:1}
+.showtimes-movie-copy .section-kicker,.showtimes-section-top .section-kicker,.showtimes-listing-top .section-kicker,.showtimes-selection .section-kicker{color:#9B7118;font-size:10px;font-weight:700;letter-spacing:.14em}
+.showtimes-movie-copy h1{margin:5px 0 9px;color:#1B1915;font-size:30px;line-height:1.2;font-weight:700;letter-spacing:-.03em}
+.showtimes-metadata{display:flex;align-items:center;flex-wrap:wrap;gap:8px;color:#625F58;font-size:13px}
+.showtimes-metadata i{width:4px;height:4px;border-radius:50%;background:#B8860B}
+.showtimes-metadata b{padding:3px 8px;border:1px solid #e6dfcf;border-radius:5px;background:#F8F6F0;color:#514D45;font-size:11px;font-weight:600}
+.showtimes-movie-copy>p{margin:9px 0 0;color:#777166;font-size:13px}
+.showtimes-city{align-self:flex-start;display:flex;flex-direction:column;gap:6px;min-width:120px;padding:11px 13px;border-radius:9px;background:#F8F6F0}
+.showtimes-city span{color:#9B7118;font-size:9px;font-weight:700;letter-spacing:.12em}
+.showtimes-city strong{color:#29261f;font-size:14px;font-weight:600}
+.showtimes-date-section{margin-top:31px;padding:23px 25px 25px;border:1px solid #E3DED2;border-radius:14px;background:#fff}
+.showtimes-section-top,.showtimes-listing-top{display:flex;align-items:end;justify-content:space-between;gap:15px}
+.showtimes-section-top h2,.showtimes-listing-top h2{margin:4px 0 0;color:#1B1915;font-size:21px;font-weight:650;letter-spacing:-.02em}
+.showtimes-month{color:#8A8375;font-size:11px;font-weight:600;letter-spacing:.08em}
+.showtimes-dates{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;margin-top:18px}
+.showtimes-date{min-width:0;display:flex;flex-direction:column;align-items:center;gap:3px;padding:11px 6px 10px;border:1px solid #E6E1D7;border-radius:9px;background:#fff;color:#625F58;cursor:pointer;transition:background .18s,border-color .18s,transform .18s}
+.showtimes-date:hover{border-color:#B8860B;transform:translateY(-1px)}
+.showtimes-date span{font-size:10px;font-weight:600;letter-spacing:.06em}
+.showtimes-date strong{color:#1B1915;font-size:21px;line-height:1.2}
+.showtimes-date.is-active{border-color:#B8860B;background:linear-gradient(145deg,#FFF9E6,#F5C518);color:#58400b;box-shadow:0 4px 12px #b8860b22}
+.showtimes-date.is-active strong{color:#1B1915}
+.showtimes-filters{display:flex;align-items:end;flex-wrap:wrap;gap:10px;margin-top:17px;padding:15px 17px;border:1px solid #E3DED2;border-radius:12px;background:#fff}
+.showtimes-filters>label:not(.showtimes-cancel-filter){display:flex;flex-direction:column;gap:5px;min-width:120px;color:#777166;font-size:10px;font-weight:600}
+.showtimes-filters select{height:36px;min-width:120px;padding:0 27px 0 10px;border:1px solid #E0DACC;border-radius:7px;outline:none;background:#fff;color:#29261f;font-size:12px;cursor:pointer}
+.showtimes-filters select:focus{border-color:#B8860B;box-shadow:0 0 0 3px #B8860B20}
+.showtimes-filters option{background:#fff;color:#1B1915}
+.showtimes-cancel-filter{display:flex;align-items:center;gap:7px;padding:0 3px 9px;color:#514D45;font-size:11px;font-weight:500;cursor:pointer}
+.showtimes-cancel-filter input{accent-color:#B8860B;width:15px;height:15px}
+.showtimes-listing{margin-top:31px}
+.showtimes-listing-top{align-items:center}
+.showtimes-listing-top h2 span{color:#777166;font-size:14px;font-weight:400;letter-spacing:0}
+.showtimes-quick-filters{display:flex;flex-wrap:wrap;gap:8px}
+.showtimes-quick-filters button{padding:8px 12px;border:1px solid #DED9CF;border-radius:20px;background:#fff;color:#514D45;font-size:11px;font-weight:600;cursor:pointer;transition:.2s}
+.showtimes-quick-filters button:hover,.showtimes-quick-filters button.is-active{border-color:#B8860B;background:#FFF3C4;color:#6C4D08}
+.showtimes-legend{display:flex;align-items:center;gap:16px;margin:15px 0 11px;color:#777166;font-size:11px}
+.showtimes-legend span{display:flex;align-items:center;gap:6px}
+.showtimes-legend i{width:7px;height:7px;border-radius:50%}
+.legend-available{background:#22A06B}.legend-fast{background:#D89A16}.legend-sold{background:#aaa69d}
+.showtimes-theatres{display:grid;gap:12px}
+.showtimes-theatre{padding:19px 21px 17px;border:1px solid #E3DED2;border-radius:13px;background:#fff;box-shadow:0 5px 18px rgba(37,30,14,.035);transition:border-color .2s,box-shadow .2s}
+.showtimes-theatre:hover{border-color:#d4c49b;box-shadow:0 8px 24px rgba(37,30,14,.07)}
+.theatre-heading{display:flex;align-items:flex-start;gap:13px}
+.theatre-logo{flex:0 0 42px;width:42px;height:42px;display:grid;place-items:center;border:1px solid #E7DDBF;border-radius:11px;background:linear-gradient(145deg,#FFF8E2,#F5F0E2);color:#9B7118;font-size:17px;font-weight:700}
+.theatre-title{min-width:0;flex:1}
+.theatre-title h3{margin:0;color:#26231d;font-size:16px;line-height:1.45;font-weight:650}
+.theatre-title>p{margin:2px 0 9px;color:#777166;font-size:12px}
+.theatre-badges{display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+.theatre-badges span{padding:4px 7px;border-radius:5px;background:#F7F5F0;color:#777166;font-size:10px}
+.theatre-badges .cancel-yes{background:#eaf6ef;color:#258052}
+.theatre-badges .cancel-no{background:#f4f1eb;color:#898377}
+.theatre-favorite{width:35px;height:35px;flex:0 0 35px;border:1px solid #E6E1D7;border-radius:50%;background:#fff;color:#8f887b;font-size:21px;line-height:1;cursor:pointer;transition:.2s}
+.theatre-favorite:hover,.theatre-favorite.is-favorite{border-color:#eab9b3;background:#fff4f2;color:#D94B45}
+.theatre-showtimes{display:flex;flex-wrap:wrap;gap:9px;margin:16px 0 0 55px;padding-top:15px;border-top:1px solid #F0EDE6}
+.showtime-choice{min-width:116px;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 12px 8px;border:1px solid #d6e9dd;border-radius:8px;background:#fbfefc;color:#268053;cursor:pointer;transition:transform .17s,border-color .17s,background .17s,box-shadow .17s}
+.showtime-choice:hover:not(:disabled){transform:translateY(-2px);border-color:#58a77b;box-shadow:0 4px 12px #1e7a4b15}
+.showtime-choice strong{font-size:13px;font-weight:650}
+.showtime-choice>span{font-size:10px;color:#777166}
+.showtime-choice small{font-size:9px;color:#32865a}
+.showtime-choice.show-fast-filling{border-color:#ecd9a8;background:#fffdf6;color:#a36f08}
+.showtime-choice.show-fast-filling small{color:#aa770e}
+.showtime-choice.show-sold-out{border-color:#e4e0d8;background:#f6f5f2;color:#aaa69d;cursor:not-allowed}
+.showtime-choice.show-sold-out small{color:#aaa69d}
+.showtime-choice.is-selected{border-color:#B8860B;background:#FFF3C4;color:#5d430b;box-shadow:0 0 0 2px #B8860B22}
+.showtimes-empty{padding:44px 20px;border:1px dashed #d9d2c2;border-radius:13px;background:#fff;text-align:center}
+.showtimes-empty>span{color:#a28951;font-size:27px}
+.showtimes-empty h3{margin:9px 0 5px;color:#29261f;font-size:17px}
+.showtimes-empty p{margin:0;color:#777166;font-size:13px}
+.showtimes-empty button{margin-top:14px;padding:8px 13px;border:1px solid #B8860B;border-radius:7px;background:#fff;color:#755716;font-size:12px;font-weight:600;cursor:pointer}
+.showtimes-selection{position:fixed;z-index:15;right:24px;bottom:20px;left:24px;max-width:1110px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:15px 19px;border:1px solid #e3d8ba;border-radius:13px;background:rgba(255,255,255,.97);box-shadow:0 14px 40px rgba(38,31,16,.16);backdrop-filter:blur(12px)}
+.showtimes-selection>div{display:flex;flex-direction:column;gap:3px}
+.showtimes-selection strong{color:#26231d;font-size:14px}
+.showtimes-selection>div>span:last-child{color:#777166;font-size:12px}
+.showtimes-selection .primary-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 17px;border:0;border-radius:8px;background:linear-gradient(135deg,#F5C518,#B8860B);color:#1B1915;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 5px 14px #b8860b2a}
+.showtimes-not-found{min-height:calc(100vh - 120px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:35px 20px;text-align:center}
+.showtimes-not-found .section-kicker{color:#9B7118;font-size:10px;letter-spacing:.14em}
+.showtimes-not-found h1{margin:8px 0;color:#1B1915;font-size:32px}
+.showtimes-not-found p{color:#625F58;font-size:15px}
+.showtimes-not-found .primary-btn{display:inline-flex;justify-content:center;padding:12px 17px;border-radius:8px;background:linear-gradient(135deg,#F5C518,#B8860B);color:#1B1915;font-size:14px;font-weight:700}
+@media(max-width:800px){.showtimes-main{padding:25px 25px 100px}.showtimes-filters{align-items:flex-start}.showtimes-filters>label:not(.showtimes-cancel-filter){flex:1 1 145px}.showtimes-filters select{width:100%}.showtimes-cancel-filter{padding:9px 0 0}.showtimes-city{min-width:105px}.showtimes-movie-heading{gap:16px;padding:20px}.showtimes-movie-copy h1{font-size:27px}}
+@media(max-width:560px){.showtimes-main{padding:19px 15px 100px}.showtimes-back{margin-bottom:16px;font-size:13px}.showtimes-movie-heading{align-items:flex-start;gap:13px;padding:15px;border-radius:12px}.showtimes-poster{flex-basis:64px;width:64px;height:89px}.showtimes-movie-copy .section-kicker{font-size:9px}.showtimes-movie-copy h1{margin:5px 0 8px;font-size:22px}.showtimes-metadata{gap:6px;font-size:11px}.showtimes-movie-copy>p{font-size:11px;line-height:1.5}.showtimes-city{display:none}.showtimes-date-section{margin-top:20px;padding:17px 13px 15px}.showtimes-section-top h2,.showtimes-listing-top h2{font-size:18px}.showtimes-month{font-size:9px}.showtimes-dates{display:flex;overflow-x:auto;gap:7px;margin:14px -2px 0;padding:2px 2px 7px;scrollbar-width:thin;scrollbar-color:#d5c89e transparent}.showtimes-date{flex:0 0 61px;padding:9px 4px}.showtimes-date span{font-size:9px}.showtimes-date strong{font-size:19px}.showtimes-filters{flex-wrap:nowrap;overflow-x:auto;gap:8px;margin-top:12px;padding:11px;border-radius:10px;scrollbar-width:thin;scrollbar-color:#d5c89e transparent}.showtimes-filters>label:not(.showtimes-cancel-filter){flex:0 0 132px;min-width:132px;font-size:9px}.showtimes-filters select{height:34px;min-width:0;font-size:11px}.showtimes-cancel-filter{flex:0 0 auto;white-space:nowrap;font-size:10px}.showtimes-listing{margin-top:23px}.showtimes-listing-top{align-items:flex-start;flex-direction:column}.showtimes-listing-top h2 span{font-size:12px}.showtimes-quick-filters button{padding:7px 10px;font-size:10px}.showtimes-legend{gap:11px;font-size:10px}.showtimes-theatre{padding:15px 13px 13px}.theatre-heading{gap:10px}.theatre-logo{flex-basis:36px;width:36px;height:36px;border-radius:9px;font-size:15px}.theatre-title h3{font-size:14px}.theatre-title>p{font-size:11px}.theatre-badges{gap:4px}.theatre-badges span{padding:4px 5px;font-size:9px}.theatre-favorite{width:32px;height:32px;flex-basis:32px;font-size:19px}.theatre-showtimes{gap:7px;margin:13px 0 0;padding-top:13px}.showtime-choice{flex:1 1 calc(50% - 7px);min-width:0;padding:8px 6px}.showtime-choice strong{font-size:12px}.showtimes-selection{right:10px;bottom:10px;left:10px;gap:10px;padding:12px;border-radius:11px}.showtimes-selection strong{font-size:12px}.showtimes-selection>div>span:last-child{font-size:10px}.showtimes-selection .primary-btn{min-height:40px;padding:0 12px;font-size:11px}}
+@media(prefers-reduced-motion:reduce){.showtimes-page *{scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
+/* Compact date and filter controls while preserving the existing Seatify theme. */
+.showtimes-main{padding-top:24px}
+.showtimes-back{margin-bottom:14px}
+.showtimes-date-section{display:grid;grid-template-columns:145px minmax(0,1fr);align-items:center;column-gap:14px;margin-top:14px;padding:14px 17px}
+.showtimes-section-top{display:flex;flex-direction:column;align-items:flex-start;gap:3px}
+.showtimes-section-top h2{margin:0;font-size:18px}
+.showtimes-month{font-size:10px}
+.showtimes-dates{grid-template-columns:repeat(7,minmax(0,1fr));gap:7px;margin-top:0}
+.showtimes-date{min-height:72px;gap:1px;padding:6px 4px;border-radius:8px}
+.showtimes-date span{font-size:10px}
+.showtimes-date strong{font-size:21px;line-height:1.15}
+.showtimes-filters{flex-wrap:nowrap;gap:8px;margin-top:12px;padding:12px 14px}
+.showtimes-filters>label:not(.showtimes-cancel-filter){flex:1 1 0;min-width:0;gap:4px;font-size:10px}
+.showtimes-filters select{width:100%;height:38px;min-width:0;padding:0 22px 0 8px;font-size:13px}
+.showtimes-cancel-filter{flex:0 0 auto;gap:6px;padding:0 0 10px;font-size:10px;white-space:nowrap}
+.showtimes-cancel-filter input{width:14px;height:14px}
+.showtimes-listing{margin-top:17px}
+.showtimes-legend{margin-top:11px;margin-bottom:9px}
+@media(max-width:1000px){
+  .showtimes-date-section{grid-template-columns:1fr;row-gap:8px}
+  .showtimes-section-top{flex-direction:row;align-items:center;justify-content:space-between}
+  .showtimes-section-top h2{font-size:19px}
+  .showtimes-dates{gap:8px}
+  .showtimes-filters{flex-wrap:wrap;align-items:flex-end}
+  .showtimes-filters>label:not(.showtimes-cancel-filter){flex:1 1 120px;min-width:110px}
+  .showtimes-cancel-filter{padding-bottom:9px}
+}
+@media(max-width:560px){
+  .showtimes-main{padding-top:17px}
+  .showtimes-back{margin-bottom:12px}
+  .showtimes-date-section{grid-template-columns:1fr;row-gap:7px;margin-top:12px;padding:13px 11px 11px}
+  .showtimes-section-top h2{font-size:18px}
+  .showtimes-dates{display:flex;overflow-x:auto;gap:7px;margin:0 -2px;padding:2px 2px 6px}
+  .showtimes-date{flex:0 0 61px;min-height:65px;gap:1px;padding:5px 4px}
+  .showtimes-date span{font-size:9px}
+  .showtimes-date strong{font-size:19px}
+  .showtimes-filters{flex-wrap:nowrap;gap:7px;margin-top:10px;padding:9px 10px}
+  .showtimes-filters>label:not(.showtimes-cancel-filter){flex:0 0 124px;min-width:124px;font-size:9px}
+  .showtimes-filters select{height:36px;font-size:12px}
+  .showtimes-cancel-filter{padding-bottom:8px;font-size:10px}
+  .showtimes-listing{margin-top:17px}
+  .showtimes-legend{margin-top:10px;margin-bottom:8px}
+}

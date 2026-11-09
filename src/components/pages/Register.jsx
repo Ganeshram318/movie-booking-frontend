@@ -1,7 +1,10 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import './Register.css';
+import { toast } from 'react-toastify';
+import { useAuth } from '../../auth/AuthContext';
+import '../../styles/Register.css'
+import api from '../../api';
 
 function Field({ id, label, error, className = '', children }) {
   return <div className={`register-field ${className}`}>
@@ -18,15 +21,34 @@ function EyeIcon({ visible }) {
 }
 
 function Register() {
+  const navigate = useNavigate();
+  const { setUser } = useAuth();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmVisible, setConfirmVisible] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const { register, handleSubmit, watch, getValues, formState: { errors, isSubmitting } } = useForm({ mode: 'onTouched', reValidateMode: 'onChange' });
+  const { register, handleSubmit, watch, getValues, reset, formState: { errors, isSubmitting } } = useForm({
+    mode: 'onTouched',
+    reValidateMode: 'onChange',
+    defaultValues: { firstName: '', lastName: '', email: '', phone: '', password: '', confirmPassword: '', terms: false },
+  });
   const password = watch('password', '');
   const passwordScore = [/[A-Z]/.test(password), /[a-z]/.test(password), /\d/.test(password), password.length >= 8, /[^A-Za-z0-9]/.test(password)].filter(Boolean).length;
   const strength = !password ? '' : passwordScore <= 2 ? 'Weak' : passwordScore <= 4 ? 'Medium' : 'Strong';
 
-  const submitValidForm = () => setSuccess(true);
+  const submitValidForm = async (data) => {
+    try {
+      const response = await api.post('/users', data);
+      const registeredUser = response.data?.user ?? response.data ?? {};
+      setUser({ ...data, ...registeredUser });
+      reset();
+      setPasswordVisible(false);
+      setConfirmVisible(false);
+      toast.success('Your account has been created successfully!');
+      navigate('/');
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Registration failed. Please try again.');
+      console.error(error);
+    }
+  };
 
   return <main className="register-page">
     <section className="register-story" aria-label="Seatify introduction">
@@ -55,9 +77,29 @@ function Register() {
 
         <form className="register-form" noValidate onSubmit={handleSubmit(submitValidForm)}>
           <div className="form-grid">
-            <Field id="fullName" label="Full Name" error={errors.fullName}>
-              <input id="fullName" type="text" autoComplete="name" placeholder="Enter your full name" aria-invalid={Boolean(errors.fullName)} aria-describedby={errors.fullName ? 'fullName-error' : undefined}
-                {...register('fullName', { required: 'Full name is required', validate: (value) => value.trim().length >= 2 || 'Please enter at least 2 characters' })}/>
+            <Field id="firstName" label="First Name" error={errors.firstName}>
+              <input id="firstName" type="text" autoComplete="given-name" placeholder="Enter your first name" aria-invalid={Boolean(errors.firstName)} aria-describedby={errors.firstName ? 'firstName-error' : undefined}
+                {...register('firstName', {
+                  required: 'First name is required',
+                  maxLength: { value: 50, message: 'First name cannot exceed 50 characters' },
+                  pattern: { value: /^[A-Za-z ]+$/, message: 'First name can contain only letters and spaces' },
+                  validate: {
+                    notBlank: (value) => value.trim().length > 0 || 'First name is required',
+                    minCharacters: (value) => value.trim().length >= 2 || 'First name must be at least 2 characters',
+                  },
+                })}/>
+            </Field>
+            <Field id="lastName" label="Last Name" error={errors.lastName}>
+              <input id="lastName" type="text" autoComplete="family-name" placeholder="Enter your last name" aria-invalid={Boolean(errors.lastName)} aria-describedby={errors.lastName ? 'lastName-error' : undefined}
+                {...register('lastName', {
+                  required: 'Last name is required',
+                  maxLength: { value: 50, message: 'Last name cannot exceed 50 characters' },
+                  pattern: { value: /^[A-Za-z ]+$/, message: 'Last name can contain only letters and spaces' },
+                  validate: {
+                    notBlank: (value) => value.trim().length > 0 || 'Last name is required',
+                    minCharacters: (value) => value.trim().length >= 2 || 'Last name must be at least 2 characters',
+                  },
+                })}/>
             </Field>
             <Field id="email" label="Email Address" error={errors.email}>
               <input id="email" type="email" autoComplete="email" placeholder="Enter your email" aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? 'email-error' : undefined}
@@ -92,7 +134,6 @@ function Register() {
             <label htmlFor="terms">I agree to the <a href="#terms" onClick={(event) => event.preventDefault()}>Terms &amp; Conditions</a> and <a href="#privacy" onClick={(event) => event.preventDefault()}>Privacy Policy</a></label>
           </div>
           {errors.terms && <p className="field-error terms-error" id="terms-error" role="alert">{errors.terms.message}</p>}
-          {success && <p className="register-success" role="status">✓ Account details are valid!</p>}
           <button className="create-account" type="submit" disabled={isSubmitting}>{isSubmitting ? 'Validating…' : 'Create Account'}<span aria-hidden="true">↗</span></button>
         </form>
 

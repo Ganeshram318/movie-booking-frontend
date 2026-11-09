@@ -1,0 +1,79 @@
+.admin-navigation { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 58px; margin-bottom: 20px; padding: 10px 16px; border: 1px solid #E2E8F0; border-radius: 12px; background: #FFFFFF; box-shadow: 0 8px 22px rgba(35, 41, 56, .05); }
+.admin-navigation-brand { color: #192132; font-size: 14px; font-weight: 700; letter-spacing: .12em; white-space: nowrap; }
+.admin-navigation-brand small { margin-left: 7px; color: #B8860B; font-size: 9px; letter-spacing: .16em; }
+.admin-navigation-links { display: flex; align-items: center; gap: 7px; }
+.admin-navigation-links a { padding: 9px 12px; border-radius: 8px; color: #475569; font-size: 12px; font-weight: 600; text-decoration: none; transition: color .2s, background .2s; }
+.admin-navigation-links a:hover { background: #F6F7FB; color: #192132; }
+.admin-navigation-links a.active { background: rgba(184, 134, 11, .1); color: #8E681A; }
+
+.admin-list-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+.admin-list-count { color: #64748B; font-size: 12px; }
+.admin-list-search { display: flex; align-items: center; gap: 9px; width: min(100%, 320px); min-height: 44px; padding: 0 12px; border: 1px solid #E2E8F0; border-radius: 8px; background: #FFFFFF; color: #64748B; }
+.admin-list-search svg { width: 16px; height: 16px; flex: 0 0 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+.admin-list-search input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: #192132; font: 400 12px 'Poppins', sans-serif; }
+.admin-list-search input::placeholder { color: #64748B; }
+.admin-table-card { overflow: hidden; border: 1px solid #E2E8F0; border-radius: 14px; background: #FFFFFF; box-shadow: 0 12px 32px rgba(35, 41, 56, .06); }
+.admin-table-scroll { overflow-x: auto; }
+.admin-movie-table { width: 100%; min-width: 900px; border-collapse: collapse; text-align: left; }
+.admin-movie-table th { padding: 14px 12px; border-bottom: 1px solid #E2E8F0; background: #F8FAFC; color: #64748B; font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
+.admin-movie-table td { padding: 13px 12px; border-bottom: 1px solid #EEF2F7; color: #475569; font-size: 11px; white-space: nowrap; }
+.admin-movie-table tr:last-child td { border-bottom: 0; }
+.admin-movie-table tbody tr:hover { background: #FCFCFD; }
+.admin-table-poster { display: block; width: 42px; height: 56px; border: 1px solid #E2E8F0; border-radius: 6px; object-fit: cover; background: #F6F7FB; }
+.admin-table-title { color: #192132; font-size: 12px; font-weight: 600; }
+.admin-featured-pill { display: inline-flex; margin-top: 5px; padding: 3px 7px; border-radius: 99px; background: rgba(184,134,11,.1); color: #8E681A; font-size: 8px; font-weight: 700; letter-spacing: .05em; }
+.admin-table-actions { display: flex; gap: 7px; }
+.admin-row-action { display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-height: 31px; padding: 0 8px; border: 1px solid #E2E8F0; border-radius: 7px; background: #FFFFFF; color: #475569; font: 600 10px 'Poppins', sans-serif; text-decoration: none; cursor: pointer; transition: border-color .18s, background .18s, color .18s, transform .18s; }
+.admin-row-action svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.admin-row-action:hover { transform: translateY(-1px); }
+.admin-row-action.edit:hover { border-color: #B8860B; background: rgba(184,134,11,.07); color: #8E681A; }
+.admin-row-action.delete { color: #B42332; }
+.admin-row-action.delete:hover { border-color: #FCA5A5; background: #FEF2F2; color: #B42332; }
+.admin-empty-state { display: grid; min-height: 300px; place-items: center; padding: 36px 20px; text-align: center; }
+.admin-empty-state-icon { display: grid; width: 60px; height: 60px; margin: 0 auto 15px; place-items: center; border: 1px solid rgba(184,134,11,.2); border-radius: 18px; background: rgba(184,134,11,.08); color: #B8860B; }
+.admin-empty-state-icon svg { width: 27px; height: 27px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.admin-empty-state h2 { margin: 0 0 7px; color: #192132; font-size: 18px; }
+.admin-empty-state p { max-width: 330px; margin: 0 auto 17px; color: #64748B; font-size: 12px; line-height: 1.6; }
+.admin-add-link { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 43px; padding: 0 16px; border: 1px solid #B8860B; border-radius: 8px; background: linear-gradient(90deg,#F59E0B 0%,#EC4899 100%); box-shadow: 0 7px 18px rgba(184,134,11,.15); color: #FFFFFF; font-size: 12px; font-weight: 700; text-decoration: none; transition: transform .2s, filter .2s; }
+.admin-add-link:hover { transform: translateY(-1px); filter: brightness(1.04); }
+.admin-add-link svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.admin-list-heading { margin-bottom: 22px; }
+.admin-list-heading .admin-movie-kicker { display: inline-block; margin-bottom: 3px; }
+.admin-edit-form .admin-form-grid { gap: 18px 16px; }
+.admin-edit-form .admin-feature-toggle { grid-column: 1 / -1; align-self: start; padding: 2px 0; }
+.admin-edit-actions { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 27px; padding-top: 22px; border-top: 1px solid #E2E8F0; }
+.admin-cancel-link { display: inline-flex; align-items: center; justify-content: center; min-height: 47px; padding: 0 20px; border: 1px solid #CBD5E1; border-radius: 8px; background: #FFFFFF; color: #475569; font-size: 13px; font-weight: 600; text-decoration: none; transition: border-color .2s, color .2s; }
+.admin-cancel-link:hover { border-color: #B8860B; color: #192132; }
+
+@media (max-width: 720px) {
+  .admin-list-toolbar { align-items: stretch; flex-direction: column; }
+  .admin-list-search { width: 100%; }
+  .admin-movie-table { min-width: 830px; }
+}
+
+@media (max-width: 520px) {
+  .admin-navigation { align-items: flex-start; flex-direction: column; gap: 8px; padding: 12px; }
+  .admin-navigation-links { width: 100%; }
+  .admin-navigation-links a { flex: 1; padding: 8px 9px; text-align: center; }
+}
+
+.admin-delete-button {
+  background-color: #dc3545;
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.admin-delete-button:hover {
+  background-color: #b02a37;
+}
+
+.admin-delete-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
