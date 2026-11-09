@@ -1,8 +1,10 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../auth/AuthContext';
 
-function ProtectedRoute({ children }) {
+// Admin-only by default; pass requireAdmin={false} for pages any logged-in user may open
+function ProtectedRoute({ children, requireAdmin = true }) {
   const { isAuthenticated, isAdmin, isLoading } = useAuth();
+  const location = useLocation();
 
   if (isLoading) {
     return (
@@ -20,10 +22,16 @@ function ProtectedRoute({ children }) {
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    return (
+      <Navigate
+        to="/login"
+        replace
+        state={{ from: `${location.pathname}${location.search}` }}
+      />
+    );
   }
 
-  if (!isAdmin) {
+  if (requireAdmin && !isAdmin) {
     return <Navigate to="/" replace />;
   }
 

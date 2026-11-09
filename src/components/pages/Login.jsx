@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../auth/AuthContext';
@@ -11,6 +11,7 @@ import api from '../../api';
 function Login() {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const { login, fetchUserProfile } = useAuth();
 
   const {
@@ -40,7 +41,7 @@ function Login() {
 
       if (profile) {
         toast.success('Login successful!');
-        navigate('/');
+        navigate(location.state?.from || '/', { replace: true });
       } else {
         toast.error('Failed to load user profile. Please try again.');
       }

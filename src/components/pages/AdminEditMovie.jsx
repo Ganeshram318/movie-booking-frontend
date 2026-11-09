@@ -4,7 +4,7 @@ import AdminNavigation from '../common/AdminNavigation'
 import '../../styles/AdminAddMovie.css'
 import '../../styles/AdminMovieManagement.css'
 import { useEffect, useState } from 'react'
-import api from '../../api'
+import api, { getErrorMessage } from '../../api'
 
 const genres = [
   'Action', 'Comedy', 'Drama', 'Romance', 'Thriller',
@@ -25,18 +25,13 @@ function AdminEditMovie() {
   // Fetch selected movie
   const fetchMovieById = async () => {
     try {
-      const response = await api.get("/movies");
+      const response = await api.get(`/movies/${id}`);
 
-      const selectedMovie = response.data.find(
-        (movie) => String(movie.id) === id
-      );
-
-      setMovie(selectedMovie || null);
-
-      console.log("Selected Movie:", selectedMovie);
+      setMovie(response.data);
 
     } catch (error) {
       console.error("Error fetching movie:", error);
+      setMovie(null);
     }
   };
 
@@ -59,7 +54,10 @@ function AdminEditMovie() {
       bannerUrl: movie.bannerUrl,
       rating: Number(movie.rating),
       featured: Boolean(movie.featured),
-      posterUrl: movie.posterUrl
+      posterUrl: movie.posterUrl,
+      director: movie.director?.trim() || null,
+      cast: movie.cast?.trim() || null,
+      certification: movie.certification?.trim() || null
     };
 
     console.log("PUT Request Body:", movieData);
@@ -73,7 +71,7 @@ function AdminEditMovie() {
 
     } catch (error) {
       console.error("Update Error:", error);
-      alert("Failed to update movie");
+      alert(getErrorMessage(error, "Failed to update movie"));
     }
   };
 
@@ -314,6 +312,45 @@ function AdminEditMovie() {
                         : Number(e.target.value)
                   })
                 }
+              />
+            </div>
+
+            {/* DIRECTOR */}
+            <div className="admin-movie-field">
+              <label htmlFor="edit-director">Director</label>
+              <input
+                id="edit-director"
+                type="text"
+                maxLength={255}
+                placeholder="e.g. Lokesh Kanagaraj"
+                value={movie?.director ?? ""}
+                onChange={(e) => setMovie({ ...movie, director: e.target.value })}
+              />
+            </div>
+
+            {/* CERTIFICATION */}
+            <div className="admin-movie-field">
+              <label htmlFor="edit-certification">Certification</label>
+              <input
+                id="edit-certification"
+                type="text"
+                maxLength={255}
+                placeholder="e.g. UA 16+"
+                value={movie?.certification ?? ""}
+                onChange={(e) => setMovie({ ...movie, certification: e.target.value })}
+              />
+            </div>
+
+            {/* CAST */}
+            <div className="admin-movie-field full-width">
+              <label htmlFor="edit-cast">Cast (comma separated)</label>
+              <input
+                id="edit-cast"
+                type="text"
+                maxLength={1000}
+                placeholder="e.g. Actor One, Actor Two"
+                value={movie?.cast ?? ""}
+                onChange={(e) => setMovie({ ...movie, cast: e.target.value })}
               />
             </div>
 

@@ -3,7 +3,7 @@ import AdminNavigation from '../common/AdminNavigation'
 import '../../styles/AdminAddMovie.css'
 import '../../styles/AdminMovieManagement.css'
 import { useEffect, useState } from 'react'
-import api from '../../api'
+import api, { getErrorMessage } from '../../api'
 
 function AdminTheatreList() {
   const [theatres, setTheatres] = useState([])
@@ -58,7 +58,7 @@ function AdminTheatreList() {
       setTheatres(theatres.filter((t) => t.id !== theatreId))
     } catch (error) {
       console.error('Delete Error:', error)
-      alert('Failed to delete theatre')
+      alert(getErrorMessage(error, 'Failed to delete theatre'))
     }
   }
 

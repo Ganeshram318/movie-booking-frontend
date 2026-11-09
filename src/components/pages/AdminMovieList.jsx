@@ -3,7 +3,7 @@ import AdminNavigation from '../common/AdminNavigation'
 import '../../styles/AdminAddMovie.css'
 import '../../styles/AdminMovieManagement.css'
 import { useEffect, useState } from 'react'
-import api from '../../api'
+import api, { getErrorMessage } from '../../api'
 
 // TODO: Replace these UI samples with your GET /movies response when you implement API integration.
 const sampleMovies = [
@@ -44,7 +44,7 @@ const handleDeleteMovie = async (movieId) => {
 
   } catch (error) {
     console.error("Delete Error:", error);
-    alert("Failed to delete movie");
+    alert(getErrorMessage(error, "Failed to delete movie"));
   }
 };
 
