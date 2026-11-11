@@ -1,9 +1,10 @@
 
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../auth/AuthContext';
+import { getReturnPath } from '../../auth/returnPath';
 import '../../styles/Register.css';
 import '../../styles/Login.css';
 import api from '../../api';
@@ -11,7 +12,16 @@ import api from '../../api';
 function Login() {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
-  const { login, fetchUserProfile } = useAuth();
+  const location = useLocation();
+  const { login, authError, retryProfile, isLoading } = useAuth();
+  const returnPath = getReturnPath(location.state?.from);
+
+  const finishLogin = (profile) => {
+    if (!profile) return false;
+    toast.success('Login successful!');
+    navigate(returnPath, { replace: true });
+    return true;
+  };
 
   const {
     register,
@@ -25,7 +35,7 @@ function Login() {
       const response = await api.post('/auth/login', {
         email: email.trim(),
         password: password
-      });
+      }, { skipAuth: true });
 
       const token = response.data.token;
 
@@ -34,14 +44,8 @@ function Login() {
         return;
       }
 
-      login(token, { email: email.trim() });
-
-      const profile = await fetchUserProfile();
-
-      if (profile) {
-        toast.success('Login successful!');
-        navigate('/');
-      } else {
+      const profile = await login(token);
+      if (!finishLogin(profile)) {
         toast.error('Failed to load user profile. Please try again.');
       }
 
@@ -117,6 +121,8 @@ function Login() {
               Sign in to continue your SEATIFY experience.
             </p>
           </div>
+
+          {authError && <div role="alert"><p>{authError}</p><button className="create-account" type="button" disabled={isLoading} onClick={async () => finishLogin(await retryProfile())}>Retry session</button></div>}
 
           <form
             className="register-form"
@@ -272,7 +278,7 @@ function Login() {
 
           <p className="login-prompt">
             Don’t have an account?{' '}
-            <Link to="/register">Sign Up</Link>
+            <Link to="/register" state={{ from: returnPath }}>Sign Up</Link>
           </p>
 
         </div>

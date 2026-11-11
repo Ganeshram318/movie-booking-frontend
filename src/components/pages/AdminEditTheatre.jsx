@@ -3,7 +3,7 @@ import AdminNavigation from '../common/AdminNavigation'
 import '../../styles/AdminAddMovie.css'
 import '../../styles/AdminMovieManagement.css'
 import { useEffect, useState, useCallback } from 'react'
-import api from '../../api'
+import api, { getErrorMessage } from '../../api'
 
 function AdminEditTheatre() {
   const { id } = useParams()
@@ -65,7 +65,7 @@ function AdminEditTheatre() {
       navigate('/admin/theatres')
     } catch (error) {
       console.error('Update Error:', error)
-      alert('Failed to update theatre')
+      alert(getErrorMessage(error, 'Failed to update theatre'))
     } finally {
       setIsSubmitting(false)
     }

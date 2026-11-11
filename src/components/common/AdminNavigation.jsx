@@ -9,6 +9,8 @@ function AdminNavigation() {
         <NavLink to="/admin/add-movie">Add Movie</NavLink>
         <NavLink to="/admin/theatres">Manage Theatres</NavLink>
         <NavLink to="/admin/theatres/add">Add Theatre</NavLink>
+        <NavLink to="/admin/showtimes" end>Manage Showtimes</NavLink>
+        <NavLink to="/admin/showtimes/add">Add Showtime</NavLink>
       </div>
     </nav>
   )
