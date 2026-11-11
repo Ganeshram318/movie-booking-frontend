@@ -31,12 +31,13 @@ function NavIcon({ name }) {
   return <span className="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">{icons[name]}</svg></span>;
 }
 
-export function Header({ query, setQuery, city: selectedCity, setCity: setSelectedCity }) {
+export function Header({ query, setQuery, city: selectedCity, setCity: setSelectedCity, cities = [] }) {
   const navigate = useNavigate();
-  const { user, logout, isAdmin } = useAuth();
+  const { user, logout, isAdmin, isAuthenticated } = useAuth();
   const [localCity, setLocalCity] = useState('Mumbai');
   const city = selectedCity ?? localCity;
   const setCity = setSelectedCity ?? setLocalCity;
+  const cityOptions = [...new Set(['All cities', 'Mumbai', 'Delhi', 'Bengaluru', 'Hyderabad', 'Chennai', 'Pune', 'Kolkata', ...cities, city])];
   const [menuOpen, setMenuOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -47,15 +48,15 @@ export function Header({ query, setQuery, city: selectedCity, setCity: setSelect
     return () => window.removeEventListener('scroll', updateScroll);
   }, []);
   return <header className={`seat-header ${scrolled ? 'scrolled' : ''}`}><div className="header-inner">
-    <a href="#top" className="brand"><img className="brand-mark-img" src="/assets/seatify-logo.png" alt="" aria-hidden="true" /><span className="brand-name">SEATIFY<small>YOUR MOVIE, YOUR MOMENT</small></span></a>
+    <Link to="/#top" className="brand"><img className="brand-mark-img" src="/assets/seatify-logo.png" alt="" aria-hidden="true" /><span className="brand-name">SEATIFY<small>YOUR MOVIE, YOUR MOMENT</small></span></Link>
     <label className="search-box"><Icon><svg viewBox="0 0 24 24" focusable="false"><circle cx="10.8" cy="10.8" r="6.6" /><path d="m16 16 4.3 4.3" /></svg></Icon><input aria-label="Search movies, theatres, and events" placeholder="Search movies, theatres, events..." value={query} onChange={(e) => setQuery(e.target.value)} /><kbd>⌘ K</kbd></label>
-    <div className="header-actions"><label className="city-picker" onClick={(event) => { if (event.target.tagName !== 'SELECT') { event.preventDefault(); const select = event.currentTarget.querySelector('select'); if (typeof select?.showPicker === 'function') select.showPicker(); else select?.click(); } }}><Icon><svg viewBox="0 0 24 24" focusable="false"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z" /><circle cx="12" cy="10" r="2.2" /></svg></Icon><select aria-label="Choose city" value={city} onChange={(e) => setCity(e.target.value)}>{['Mumbai', 'Delhi', 'Bengaluru', 'Hyderabad', 'Chennai', 'Pune', 'Kolkata'].map((place) => <option key={place}>{place}</option>)}</select><span><svg viewBox="0 0 16 16" focusable="false"><path d="m4 6 4 4 4-4" /></svg></span></label>{user ? <div className="account-control"><button className="sign-in account-button" type="button" aria-expanded={accountOpen} onClick={() => setAccountOpen((open) => !open)}>{user.firstName || user.email}<span>⌄</span></button>{accountOpen && <div className="account-dropdown"><strong>{[user.firstName, user.lastName].filter(Boolean).join(' ') || user.email}</strong><button type="button" onClick={() => setAccountOpen(false)}>My Profile</button><Link to="/bookings" onClick={() => setAccountOpen(false)}>My Bookings</Link>{isAdmin && <Link to="/admin/movies" onClick={() => setAccountOpen(false)}>Admin Panel</Link>}{isAdmin && <hr />}<button type="button" onClick={() => { logout(); setAccountOpen(false); navigate('/'); }}>Logout</button></div>}</div> : <Link className="sign-in" to="/login">Sign in <span>↗</span></Link>}</div>
+    <div className="header-actions"><label className="city-picker" onClick={(event) => { if (event.target.tagName !== 'SELECT') { event.preventDefault(); const select = event.currentTarget.querySelector('select'); if (typeof select?.showPicker === 'function') select.showPicker(); else select?.click(); } }}><Icon><svg viewBox="0 0 24 24" focusable="false"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z" /><circle cx="12" cy="10" r="2.2" /></svg></Icon><select aria-label="Choose city" value={city} onChange={(e) => setCity(e.target.value)}>{cityOptions.map((place) => <option key={place}>{place}</option>)}</select><span><svg viewBox="0 0 16 16" focusable="false"><path d="m4 6 4 4 4-4" /></svg></span></label>{isAuthenticated && user ? <div className="account-control"><button className="sign-in account-button" type="button" aria-expanded={accountOpen} onClick={() => setAccountOpen((open) => !open)}>{user.firstName || user.email}<span>⌄</span></button>{accountOpen && <div className="account-dropdown"><strong>{[user.firstName, user.lastName].filter(Boolean).join(' ') || user.email}</strong><button type="button" onClick={() => setAccountOpen(false)}>My Profile</button><Link to="/bookings" onClick={() => setAccountOpen(false)}>My Bookings</Link>{isAdmin && <Link to="/admin/movies" onClick={() => setAccountOpen(false)}>Admin Panel</Link>}{isAdmin && <hr />}<button type="button" onClick={() => { logout(); setAccountOpen(false); navigate('/'); }}>Logout</button></div>}</div> : <Link className="sign-in" to="/login">Sign in <span>↗</span></Link>}</div>
     <button className={`menu-toggle ${menuOpen ? 'active' : ''}`} onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation" aria-expanded={menuOpen} aria-controls="seatify-navigation"><span /><span /><span /></button>
   </div><nav id="seatify-navigation" aria-label="Main navigation" className={`nav-row ${menuOpen ? 'open' : ''}`}><div className="nav-links"><Link to="/" onClick={() => setMenuOpen(false)}><NavIcon name="home" />Home</Link>{[
-    ['Movies', 'movies', '#movies', true],
-    ['Theatres', 'theatres', '#theatres', false],
-    ['Events', 'events', '#movies', false],
-    ['Offers', 'offers', '#offers', false],
+    ['Movies', 'movies', '/#movies', true],
+    ['Theatres', 'theatres', '/#theatres', false],
+    ['Events', 'events', '/#movies', false],
+    ['Offers', 'offers', '/#offers', false],
     ['My Bookings', 'bookings', '/bookings', false],
   ].map(([item, icon, href, selected]) => href.startsWith('/') ? <Link key={item} className={selected ? 'selected' : ''} to={href} onClick={() => setMenuOpen(false)}><NavIcon name={icon} />{item}</Link> : <a key={item} className={selected ? 'selected' : ''} href={href} onClick={() => setMenuOpen(false)}><NavIcon name={icon} />{item}</a>)}{isAdmin && <Link to="/admin/movies" onClick={() => setMenuOpen(false)}><NavIcon name="movies" />Admin Dashboard</Link>}</div><span className="nav-note"><i /> CURATED FOR YOUR CITY</span></nav></header>;
 }

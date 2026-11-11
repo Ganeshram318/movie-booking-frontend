@@ -8,16 +8,16 @@ import '../../styles/MovieDetails.css'
 function MovieDetails() {
   const { id } = useParams();
   const movieId = parseId(id);
-  const [movie, setMovie] = useState(null);
-  const [formats, setFormats] = useState([]);
-  const [result, setResult] = useState({ key: null, status: 'loading' });
-  const [errorMessage, setErrorMessage] = useState('');
+  const [result, setResult] = useState({ key: null, status: 'loading', movie: null, formats: [] });
   const [reloadKey, setReloadKey] = useState(0);
   const [query, setQuery] = useState('');
   const [trailerOpen, setTrailerOpen] = useState(false);
   const [toast, setToast] = useState('');
 
   const requestKey = `${movieId}:${reloadKey}`;
+  const movie = movieId && result.key === requestKey ? result.movie : null;
+  const formats = movie ? result.formats : [];
+  const errorMessage = result.key === requestKey ? result.errorMessage : '';
   const status = !movieId ? 'not-found' : result.key !== requestKey ? 'loading' : result.status;
 
   useEffect(() => {
@@ -25,28 +25,20 @@ function MovieDetails() {
       return undefined;
     }
     let active = true;
-    const finish = (value) => setResult({ key: requestKey, status: value });
     fetchMovie(movieId)
       .then((data) => {
         if (!active) return;
-        setMovie(data);
-        finish('ready');
+        setResult({ key: requestKey, status: 'ready', movie: data, formats: [] });
         // Formats come from the movie's real upcoming showtimes
         fetchShowtimesByMovie(movieId)
           .then((shows) => {
-            if (active) setFormats([...new Set(shows.filter((show) => isUpcoming(show)).map((show) => show.format).filter(Boolean))]);
+            if (active) setResult((current) => ({ ...current, formats: [...new Set(shows.filter((show) => isUpcoming(show)).map((show) => show.format).filter(Boolean))] }));
           })
-          .catch(() => { if (active) setFormats([]); });
+          .catch(() => { /* Movie details remain available if showtimes cannot be loaded. */ });
       })
       .catch((error) => {
         if (!active) return;
-        setMovie(null);
-        if (error.response?.status === 404) {
-          finish('not-found');
-        } else {
-          setErrorMessage(getErrorMessage(error, 'Unable to load this movie.'));
-          finish('error');
-        }
+        setResult({ key: requestKey, status: error.response?.status === 404 ? 'not-found' : 'error', movie: null, formats: [], errorMessage: getErrorMessage(error, 'Unable to load this movie.') });
       });
     return () => { active = false; };
   }, [movieId, requestKey]);

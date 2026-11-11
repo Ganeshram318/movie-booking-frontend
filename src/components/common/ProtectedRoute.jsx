@@ -3,7 +3,7 @@ import { useAuth } from '../../auth/AuthContext';
 
 // Admin-only by default; pass requireAdmin={false} for pages any logged-in user may open
 function ProtectedRoute({ children, requireAdmin = true }) {
-  const { isAuthenticated, isAdmin, isLoading } = useAuth();
+  const { isAuthenticated, isAdmin, isLoading, authError, retryProfile, logout } = useAuth();
   const location = useLocation();
 
   if (isLoading) {
@@ -19,6 +19,14 @@ function ProtectedRoute({ children, requireAdmin = true }) {
         Loading...
       </div>
     );
+  }
+
+  if (authError) {
+    return <main className="seatify-app"><section className="payment-card">
+      <p role="alert">{authError}</p>
+      <button className="primary-btn" type="button" onClick={retryProfile}>Retry session</button>
+      <button className="outline-btn" type="button" onClick={logout}>Sign out</button>
+    </section></main>;
   }
 
   if (!isAuthenticated) {

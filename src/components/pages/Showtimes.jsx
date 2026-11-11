@@ -49,8 +49,7 @@ function Showtimes() {
   const [errorMessage, setErrorMessage] = useState('');
   const [reloadKey, setReloadKey] = useState(0);
   const [query, setQuery] = useState('');
-  const [city, setCity] = useState('Mumbai');
-  const [theatreCity, setTheatreCity] = useState('All cities');
+  const [city, setCity] = useState('All cities');
   const [date, setDate] = useState(null);
   const [language, setLanguage] = useState('All languages');
   const [format, setFormat] = useState('All formats');
@@ -111,7 +110,7 @@ function Showtimes() {
       const availabilityMatches = availability === 'Any availability' || getAvailability(show) === availability.toUpperCase();
       const lateMatches = !lateNight || hour >= 22 || hour < 4;
       const earlyMatches = !earlyMorning || (hour >= 5 && hour < 10);
-      return (theatreCity === 'All cities' || show.theatreCity === theatreCity) && (language === 'All languages' || show.language === language) && (format === 'All formats' || show.format === format) && priceMatches && timeMatches && availabilityMatches && lateMatches && earlyMatches;
+      return (city === 'All cities' || show.theatreCity === city) && (language === 'All languages' || show.language === language) && (format === 'All formats' || show.format === format) && priceMatches && timeMatches && availabilityMatches && lateMatches && earlyMatches;
     });
 
     const byTheatre = new Map();
@@ -128,9 +127,12 @@ function Showtimes() {
     if (sort === 'Earliest') result.sort((a, b) => String(a.shows[0].startTime).localeCompare(String(b.shows[0].startTime)));
     if (sort === 'Lowest price') result.sort((a, b) => Math.min(...a.shows.map((show) => Number(show.ticketPrice))) - Math.min(...b.shows.map((show) => Number(show.ticketPrice))));
     return result;
-  }, [showsForDate, theatreCity, language, format, price, time, availability, lateNight, earlyMorning, sort]);
+  }, [showsForDate, city, language, format, price, time, availability, lateNight, earlyMorning, sort]);
 
-  const listingPlace = theatreCity !== 'All cities' ? `in ${theatreCity}` : cities.length === 1 ? `in ${cities[0]}` : 'across all cities';
+  const listingPlace = city !== 'All cities' ? `in ${city}` : cities.length === 1 ? `in ${cities[0]}` : 'across all cities';
+  const visibleSelectedShow = filteredTheatres.flatMap((theatre) => theatre.shows).find((show) => show.id === selectedShow?.id);
+  const changeCity = (value) => { setCity(value); setSelectedShow(null); };
+  const changeFilter = (setter) => (event) => { setter(event.target.value); setSelectedShow(null); };
 
   const toggleFavorite = (theatreId) => setFavorites((current) => {
     const next = new Set(current);
@@ -139,7 +141,7 @@ function Showtimes() {
   });
 
   return <div className="seatify-app showtimes-page">
-    <Header query={query} setQuery={setQuery} city={city} setCity={setCity}/>
+    <Header query={query} setQuery={setQuery} city={city} setCity={changeCity} cities={cities}/>
     {status === 'loading' ? <main className="showtimes-not-found"><span className="section-kicker">SEATIFY SHOWTIMES</span><h1>Loading showtimes...</h1><p>Finding shows for this movie.</p></main>
     : status === 'error' ? <main className="showtimes-not-found"><span className="section-kicker">SEATIFY SHOWTIMES</span><h1>Something went wrong</h1><p>{errorMessage}</p><button className="primary-btn" type="button" onClick={() => setReloadKey((key) => key + 1)}>Try Again</button></main>
     : !movie ? <main className="showtimes-not-found"><span className="section-kicker">SEATIFY SHOWTIMES</span><h1>Movie not found</h1><p>We couldn't find a movie with that ID.</p><Link className="primary-btn" to="/">Back to Home</Link></main> : <main className="showtimes-main">
@@ -159,19 +161,19 @@ function Showtimes() {
       </section>
 
       <section className="showtimes-filters" aria-label="Filter showtimes">
-        {cities.length > 1 && <label>City<select value={theatreCity} onChange={(event) => { setTheatreCity(event.target.value); setSelectedShow(null); }}><option>All cities</option>{cities.map((item) => <option key={item}>{item}</option>)}</select></label>}
-        <label>Language<select value={language} onChange={(event) => setLanguage(event.target.value)}><option>All languages</option>{languages.map((item) => <option key={item}>{item}</option>)}</select></label>
-        {formats.length > 0 && <label>Format<select value={format} onChange={(event) => setFormat(event.target.value)}><option>All formats</option>{formats.map((item) => <option key={item}>{item}</option>)}</select></label>}
-        <label>Price range<select value={price} onChange={(event) => setPrice(event.target.value)}><option>Any price</option><option>₹100–₹200</option><option>₹200–₹300</option><option>₹300+</option></select></label>
-        <label>Preferred time<select value={time} onChange={(event) => setTime(event.target.value)}>{['Any time', 'Morning', 'Afternoon', 'Evening', 'Night'].map((item) => <option key={item}>{item}</option>)}</select></label>
-        <label>Availability<select value={availability} onChange={(event) => setAvailability(event.target.value)}>{['Any availability', 'Available', 'Fast filling'].map((item) => <option key={item}>{item}</option>)}</select></label>
-        <label>Sort by<select value={sort} onChange={(event) => setSort(event.target.value)}>{['Recommended', 'Earliest', 'Lowest price'].map((item) => <option key={item}>{item}</option>)}</select></label>
+        {cities.length > 1 && <label>City<select value={city} onChange={changeFilter(setCity)}><option>All cities</option>{[...new Set([...cities, city].filter((item) => item !== 'All cities'))].map((item) => <option key={item}>{item}</option>)}</select></label>}
+        <label>Language<select value={language} onChange={changeFilter(setLanguage)}><option>All languages</option>{languages.map((item) => <option key={item}>{item}</option>)}</select></label>
+        {formats.length > 0 && <label>Format<select value={format} onChange={changeFilter(setFormat)}><option>All formats</option>{formats.map((item) => <option key={item}>{item}</option>)}</select></label>}
+        <label>Price range<select value={price} onChange={changeFilter(setPrice)}><option>Any price</option><option>₹100–₹200</option><option>₹200–₹300</option><option>₹300+</option></select></label>
+        <label>Preferred time<select value={time} onChange={changeFilter(setTime)}>{['Any time', 'Morning', 'Afternoon', 'Evening', 'Night'].map((item) => <option key={item}>{item}</option>)}</select></label>
+        <label>Availability<select value={availability} onChange={changeFilter(setAvailability)}>{['Any availability', 'Available', 'Fast filling'].map((item) => <option key={item}>{item}</option>)}</select></label>
+        <label>Sort by<select value={sort} onChange={changeFilter(setSort)}>{['Recommended', 'Earliest', 'Lowest price'].map((item) => <option key={item}>{item}</option>)}</select></label>
       </section>
       </div>
 
       <section className="showtimes-listing">
         <div className="showtimes-listing-top"><div><span className="section-kicker">YOUR CINEMA OPTIONS</span><h2>{filteredTheatres.length} {filteredTheatres.length === 1 ? 'theatre' : 'theatres'} <span>{listingPlace}</span></h2></div>
-          <div className="showtimes-quick-filters"><button type="button" className={lateNight ? 'is-active' : ''} onClick={() => { setLateNight(!lateNight); setEarlyMorning(false); }}>☾ Late night</button><button type="button" className={earlyMorning ? 'is-active' : ''} onClick={() => { setEarlyMorning(!earlyMorning); setLateNight(false); }}>☀ Early morning</button></div>
+          <div className="showtimes-quick-filters"><button type="button" className={lateNight ? 'is-active' : ''} onClick={() => { setLateNight(!lateNight); setEarlyMorning(false); setSelectedShow(null); }}>☾ Late night</button><button type="button" className={earlyMorning ? 'is-active' : ''} onClick={() => { setEarlyMorning(!earlyMorning); setLateNight(false); setSelectedShow(null); }}>☀ Early morning</button></div>
         </div>
         <div className="showtimes-legend"><span><i className="legend-available"/>Available</span><span><i className="legend-fast"/>Fast filling</span><span><i className="legend-sold"/>Sold out</span></div>
         <div className="showtimes-theatres">{filteredTheatres.map((theatre) => <article className="showtimes-theatre" key={theatre.id}>
@@ -179,9 +181,9 @@ function Showtimes() {
             <button className={`theatre-favorite ${favorites.has(theatre.id) ? 'is-favorite' : ''}`} type="button" aria-label={favorites.has(theatre.id) ? 'Remove theatre from favourites' : 'Add theatre to favourites'} onClick={() => toggleFavorite(theatre.id)}>{favorites.has(theatre.id) ? '♥' : '♡'}</button></div>
           <div className="theatre-showtimes">{theatre.shows.map((show) => { const showAvailability = getAvailability(show); const isSelected = selectedShow?.id === show.id; return <button key={show.id} type="button" disabled={showAvailability === 'SOLD OUT'} aria-pressed={isSelected} className={`showtime-choice show-${showAvailability.toLowerCase().replace(' ', '-')} ${isSelected ? 'is-selected' : ''}`} onClick={() => setSelectedShow(show)}><strong>{formatTime(show.startTime)}</strong><span>{[show.format, `Screen ${show.screenNumber}`, formatCurrency(show.ticketPrice)].filter(Boolean).join(' · ')}</span><small>{showAvailability === 'SOLD OUT' ? 'Sold out' : `${show.availableSeats} seats left`}</small></button>; })}</div>
         </article>)}</div>
-        {!filteredTheatres.length && <div className="showtimes-empty"><span>⌕</span><h3>{!shows.length ? 'No upcoming shows for this movie yet' : !showsForDate.length ? 'No shows on this date' : 'No shows available for the selected filters'}</h3><p>{!shows.length ? 'Please check back later.' : !showsForDate.length ? 'Pick another date to see available showtimes.' : 'Try changing your filters to see more showtimes.'}</p>{showsForDate.length > 0 && <button type="button" onClick={() => { setTheatreCity('All cities'); setLanguage('All languages'); setFormat('All formats'); setPrice('Any price'); setTime('Any time'); setAvailability('Any availability'); setLateNight(false); setEarlyMorning(false); }}>Clear filters</button>}</div>}
+        {!filteredTheatres.length && <div className="showtimes-empty"><span>⌕</span><h3>{!shows.length ? 'No upcoming shows for this movie yet' : !showsForDate.length ? 'No shows on this date' : 'No shows available for the selected filters'}</h3><p>{!shows.length ? 'Please check back later.' : !showsForDate.length ? 'Pick another date to see available showtimes.' : 'Try changing your filters to see more showtimes.'}</p>{showsForDate.length > 0 && <button type="button" onClick={() => { setCity('All cities'); setSelectedShow(null); setLanguage('All languages'); setFormat('All formats'); setPrice('Any price'); setTime('Any time'); setAvailability('Any availability'); setLateNight(false); setEarlyMorning(false); }}>Clear filters</button>}</div>}
       </section>
-      {selectedShow && <aside className="showtimes-selection" aria-live="polite"><div><span className="section-kicker">YOUR SELECTED SHOW</span><strong>{selectedShow.theatreName}</strong><span>{[formatTime(selectedShow.startTime), selectedShow.format, formatCurrency(selectedShow.ticketPrice)].filter(Boolean).join(' · ')}</span></div><Link className="primary-btn" to={`/movie/${movie.id}/showtimes/${selectedShow.id}/seats`}>Select Seats <span>→</span></Link></aside>}
+      {visibleSelectedShow && <aside className="showtimes-selection" aria-live="polite"><div><span className="section-kicker">YOUR SELECTED SHOW</span><strong>{visibleSelectedShow.theatreName}</strong><span>{[formatTime(visibleSelectedShow.startTime), visibleSelectedShow.format, formatCurrency(visibleSelectedShow.ticketPrice)].filter(Boolean).join(' · ')}</span></div><Link className="primary-btn" to={`/movie/${movie.id}/showtimes/${visibleSelectedShow.id}/seats`}>Select Seats <span>→</span></Link></aside>}
     </main>}
   </div>;
 }

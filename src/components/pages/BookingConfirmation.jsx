@@ -9,16 +9,17 @@ function BookingConfirmation() {
   const { bookingId } = useParams();
   const location = useLocation();
   const id = parseId(bookingId);
-  const [booking, setBooking] = useState(null);
-  const [error, setError] = useState(id ? '' : 'Booking not found.');
+  const [result, setResult] = useState({ id: null, booking: null, error: '' });
+  const booking = id && result.id === id ? result.booking : null;
+  const error = !id ? 'Booking not found.' : result.id === id ? result.error : '';
   const [query, setQuery] = useState('');
 
   useEffect(() => {
     if (!id) return undefined;
     let active = true;
     fetchBooking(id)
-      .then((data) => { if (active) setBooking(data); })
-      .catch((err) => { if (active) setError(err.response?.status === 404 ? 'Booking not found.' : getErrorMessage(err, 'Unable to load this booking.')); });
+      .then((data) => { if (active) setResult({ id, booking: data, error: '' }); })
+      .catch((err) => { if (active) setResult({ id, booking: null, error: err.response?.status === 404 ? 'Booking not found.' : getErrorMessage(err, 'Unable to load this booking.') }); });
     return () => { active = false; };
   }, [id]);
 

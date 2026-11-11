@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { useAuth } from '../../auth/AuthContext';
+import { getReturnPath } from '../../auth/returnPath';
 import '../../styles/Register.css'
 import api from '../../api';
 
@@ -22,7 +22,8 @@ function EyeIcon({ visible }) {
 
 function Register() {
   const navigate = useNavigate();
-  const { setUser } = useAuth();
+  const location = useLocation();
+  const returnPath = getReturnPath(location.state?.from);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmVisible, setConfirmVisible] = useState(false);
   const { register, handleSubmit, watch, getValues, reset, formState: { errors, isSubmitting } } = useForm({
@@ -36,14 +37,12 @@ function Register() {
 
   const submitValidForm = async (data) => {
     try {
-      const response = await api.post('/users', data);
-      const registeredUser = response.data?.user ?? response.data ?? {};
-      setUser({ ...data, ...registeredUser });
+      await api.post('/users', data, { skipAuth: true });
       reset();
       setPasswordVisible(false);
       setConfirmVisible(false);
-      toast.success('Your account has been created successfully!');
-      navigate('/');
+      toast.success('Your account has been created. Please sign in to continue.');
+      navigate('/login', { replace: true, state: { from: returnPath } });
     } catch (error) {
       toast.error(error.response?.data?.message || 'Registration failed. Please try again.');
       console.error(error);
@@ -137,7 +136,7 @@ function Register() {
           <button className="create-account" type="submit" disabled={isSubmitting}>{isSubmitting ? 'Validating…' : 'Create Account'}<span aria-hidden="true">↗</span></button>
         </form>
 
-        <p className="login-prompt">Already have an account? <Link to="/login">Login</Link></p>
+        <p className="login-prompt">Already have an account? <Link to="/login" state={{ from: returnPath }}>Login</Link></p>
         <div className="register-legal">BY CONTINUING, YOU AGREE TO OUR <span>TERMS OF SERVICE</span></div>
       </div>
     </section>

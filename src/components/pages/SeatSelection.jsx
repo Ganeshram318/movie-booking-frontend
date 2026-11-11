@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState, useRef } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { getErrorMessage } from '../../api';
 import { fetchMovie, fetchSeatMap, fetchShowtime, formatCurrency, formatShowDate, formatTime, isUpcoming, parseId } from '../../services/seatify';
@@ -19,7 +19,8 @@ function SeatSelection() {
   const [result, setResult] = useState({ key: null, status: 'loading' });
   const [errorMessage, setErrorMessage] = useState('');
   const [reloadKey, setReloadKey] = useState(0);
-  const [checking, setChecking] = useState(false);
+  const [verificationKey, setVerificationKey] = useState(null);
+  const verification = useRef(null);
   const [query, setQuery] = useState('');
   const [ticketCount, setTicketCount] = useState(2);
   const [selectedSeats, setSelectedSeats] = useState([]);
@@ -27,6 +28,7 @@ function SeatSelection() {
   const [toast, setToast] = useState('');
 
   const requestKey = `${movieId}:${showtimeId}:${reloadKey}`;
+  const checking = verificationKey === requestKey;
   const status = !movieId || !showtimeId ? 'not-found' : result.key !== requestKey ? 'loading' : result.status;
 
   useEffect(() => {
@@ -58,7 +60,7 @@ function SeatSelection() {
           finish('error');
         }
       });
-    return () => { active = false; };
+    return () => { active = false; verification.current = null; };
   }, [movieId, showtimeId, requestKey]);
 
   const rows = useMemo(() => [...(seatMap?.rows ?? [])].reverse(), [seatMap]);
@@ -78,6 +80,7 @@ function SeatSelection() {
   }, []);
 
   const selectSeat = (seat) => {
+    if (verification.current) return;
     if (seat.status !== 'AVAILABLE') return;
     if (selectedSeats.includes(seat.id)) {
       setSelectedSeats((current) => current.filter((seatId) => seatId !== seat.id));
@@ -91,6 +94,7 @@ function SeatSelection() {
   };
 
   const changeTicketCount = (count) => {
+    if (verification.current) return;
     setTicketCount(count);
     setSelectedSeats((current) => current.slice(0, count));
   };
@@ -99,23 +103,30 @@ function SeatSelection() {
 
   // Re-check availability with the server right before leaving the seat map
   const continueToPayment = async () => {
-    setChecking(true);
+    if (verification.current || !selectedSeats.length || status !== 'ready') return;
+    const request = { seats: [...selectedSeats], showId: show.id };
+    verification.current = request;
+    setVerificationKey(requestKey);
     try {
-      const latest = await fetchSeatMap(show.id);
+      const latest = await fetchSeatMap(request.showId);
+      if (verification.current !== request) return;
       const booked = new Set(latest.rows.flatMap((row) => row.seats.filter((seat) => seat.status !== 'AVAILABLE').map((seat) => seat.id)));
-      const taken = selectedSeats.filter((seatId) => booked.has(seatId));
+      const taken = request.seats.filter((seatId) => booked.has(seatId));
       setSeatMap(latest);
       if (taken.length) {
         setSelectedSeats((current) => current.filter((seatId) => !booked.has(seatId)));
         notify(`Sorry, ${taken.join(', ')} ${taken.length === 1 ? 'was' : 'were'} just booked. Please choose again.`);
         return;
       }
-      const params = new URLSearchParams({ showtimeId: String(show.id), seats: selectedSeats.join(',') });
+      const params = new URLSearchParams({ showtimeId: String(request.showId), seats: request.seats.join(',') });
       navigate(`/payment?${params.toString()}`);
     } catch (error) {
-      notify(getErrorMessage(error, 'Could not verify seat availability. Please try again.'));
+      if (verification.current === request) notify(getErrorMessage(error, 'Could not verify seat availability. Please try again.'));
     } finally {
-      setChecking(false);
+      if (verification.current === request) {
+        verification.current = null;
+        setVerificationKey(null);
+      }
     }
   };
 
@@ -143,7 +154,7 @@ function SeatSelection() {
         <div className="seat-map-topline"><div><span className="section-kicker">SCREENING ROOM</span><h2>Select your seats</h2><p>Tap seats to select or deselect. Seats are only reserved once your booking is confirmed. {seatMap.availableSeats} of {seatMap.totalSeats} seats available.</p></div>
           <div className="seat-map-actions">
             <div className="seat-zoom-controls" aria-label="Seat map zoom controls"><button type="button" aria-label="Zoom out" disabled={zoom <= 0.8} onClick={() => setZoom((value) => Math.max(0.8, +(value - 0.2).toFixed(1)))}>−</button><span>{Math.round(zoom * 100)}%</span><button type="button" aria-label="Zoom in" disabled={zoom >= 1.4} onClick={() => setZoom((value) => Math.min(1.4, +(value + 0.2).toFixed(1)))}>+</button></div>
-            <label className="ticket-count-label">Tickets<select value={ticketCount} onChange={(event) => changeTicketCount(Number(event.target.value))}>{Array.from({ length: maxTickets }, (_, index) => index + 1).map((count) => <option key={count} value={count}>{count} {count === 1 ? 'Ticket' : 'Tickets'}</option>)}</select></label>
+            <label className="ticket-count-label">Tickets<select disabled={checking} value={ticketCount} onChange={(event) => changeTicketCount(Number(event.target.value))}>{Array.from({ length: maxTickets }, (_, index) => index + 1).map((count) => <option key={count} value={count}>{count} {count === 1 ? 'Ticket' : 'Tickets'}</option>)}</select></label>
           </div>
         </div>
 
@@ -155,7 +166,7 @@ function SeatSelection() {
               const selected = selectedSeats.includes(seat.id);
               const seatStatus = selected ? 'SELECTED' : seat.status === 'AVAILABLE' ? 'AVAILABLE' : 'SOLD';
               const priceLabel = formatCurrency(row.price);
-              return <button key={seat.id} type="button" aria-label={`Row ${row.row}, seat ${seat.number}, ${seatStatus.toLowerCase()}, ${row.category.toLowerCase()} ${priceLabel}`} aria-pressed={selected} disabled={seat.status !== 'AVAILABLE'} onClick={() => selectSeat(seat)} className={`cinema-seat seat-${seatStatus.toLowerCase()} seat-category-${row.category.toLowerCase()}`} title={`${seat.id} · ${row.category} · ${priceLabel}`}>{seat.number}</button>;
+              return <button key={seat.id} type="button" aria-label={`Row ${row.row}, seat ${seat.number}, ${seatStatus.toLowerCase()}, ${row.category.toLowerCase()} ${priceLabel}`} aria-pressed={selected} disabled={checking || seat.status !== 'AVAILABLE'} onClick={() => selectSeat(seat)} className={`cinema-seat seat-${seatStatus.toLowerCase()} seat-category-${row.category.toLowerCase()}`} title={`${seat.id} · ${row.category} · ${priceLabel}`}>{seat.number}</button>;
             })}</div>)}</div>)}</div>
         </div></div>
         <div className="seat-screen"><span>SCREEN THIS WAY</span></div>

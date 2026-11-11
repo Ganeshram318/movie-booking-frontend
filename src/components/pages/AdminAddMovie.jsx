@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import '../../styles/AdminAddMovie.css'
@@ -20,6 +20,8 @@ function validUrl(value) {
 }
 
 function AdminAddMovie() {
+  const submissionInFlight = useRef(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [previewMovie, setPreviewMovie] = useState(null)
   const [posterFailed, setPosterFailed] = useState(false)
   const [apiMessage,setApiMesaage] = useState(' ')
@@ -29,37 +31,39 @@ function AdminAddMovie() {
   const posterUrl = watch('posterUrl')
   const showPoster = validUrl(posterUrl) && posterUrl && !posterFailed
 
- const submitMovie = async (data) => {
-  const movieData = {
-    name: data.title,
-    language: data.language,
-    genre: data.genre,
-    duration: Number(data.duration),
-    price: Number(data.price),
-    description: data.description,
-releaseDate: data.releaseDate,
-posterUrl: data.posterUrl,
-bannerUrl: data.bannerUrl,
-rating: data.rating === '' ? 0 : Number(data.rating),
-featured: data.featured,
-director: data.director.trim() || null,
-cast: data.cast.trim() || null,
-certification: data.certification.trim() || null,
+  const submitMovie = async (data) => {
+    if (submissionInFlight.current) return
+    submissionInFlight.current = true
+    setIsSubmitting(true)
+    try {
+      const movieData = {
+        name: data.title,
+        language: data.language,
+        genre: data.genre,
+        duration: Number(data.duration),
+        price: Number(data.price),
+        description: data.description,
+        releaseDate: data.releaseDate,
+        posterUrl: data.posterUrl,
+        bannerUrl: data.bannerUrl,
+        rating: data.rating === '' ? 0 : Number(data.rating),
+        featured: data.featured,
+        director: data.director.trim() || null,
+        cast: data.cast.trim() || null,
+        certification: data.certification.trim() || null,
+      }
+      setApiMesaage('')
+      const response = await api.post('/movies', movieData)
+      setPreviewMovie({ ...data, title: response.data.name, duration: response.data.duration, price: response.data.price })
+      setApiMesaage('Movie saved successfully to the database!')
+      reset()
+    } catch (error) {
+      alert(getErrorMessage(error, 'Failed to add movie. Please try again later.'))
+    } finally {
+      submissionInFlight.current = false
+      setIsSubmitting(false)
+    }
   }
-  setApiMesaage('')
-   try {
-    const response = await api.post('/movies', movieData)
-    console.log('Movie added successfully:', response.data)
-    setPreviewMovie({ ...data, title: response.data.name,
-      duration: response.data.duration,
-      price: response.data.price
-    })
-    setApiMesaage("Movie saved successfully to the database!")
-    reset()
-   } catch (error) {
-    alert(getErrorMessage(error, 'Failed to add movie. Please try again later.'))
-   }
-}
 
   const clearForm = () => {
     reset()
@@ -108,8 +112,8 @@ certification: data.certification.trim() || null,
           </div>
 
           <div className="admin-form-actions">
-            <button className="admin-submit-button" type="submit">Add Movie <span aria-hidden="true">↗</span></button>
-            <button className="admin-clear-button" type="button" onClick={clearForm}>Clear Form</button>
+            <button className="admin-submit-button" type="submit" disabled={isSubmitting}>{isSubmitting ? 'Saving...' : 'Add Movie'} <span aria-hidden="true">↗</span></button>
+            <button className="admin-clear-button" type="button" onClick={clearForm} disabled={isSubmitting}>Clear Form</button>
           </div>
         </form>
 {apiMessage && (<p role='status'>{apiMessage}</p>)}

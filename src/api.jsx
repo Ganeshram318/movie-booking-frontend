@@ -5,9 +5,11 @@ const api = axios.create({
 });
 
 let authToken = null;
+let authSession = 0;
 let unauthorizedHandler = null;
 
 export const setAuthToken = (token) => {
+  authSession += 1;
   authToken = token;
   if (token) {
     api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -38,8 +40,15 @@ export const getErrorMessage = (error, fallback = 'Something went wrong. Please 
 
 api.interceptors.request.use(
   (config) => {
+    if (config.skipAuth) {
+      delete config.headers['Authorization'];
+      return config;
+    }
     if (authToken && !config.headers['Authorization']) {
       config.headers['Authorization'] = `Bearer ${authToken}`;
+    }
+    if (config.headers['Authorization'] === `Bearer ${authToken}`) {
+      config.seatifyAuthSession = authSession;
     }
     return config;
   },
@@ -51,9 +60,11 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    const sentToken = Boolean(error.config?.headers?.['Authorization']);
+    const sentToken = error.config?.headers?.['Authorization'];
     // Only a 401 for a request that carried our token means the session is no longer valid
-    if (error.response?.status === 401 && sentToken && authToken) {
+    if (error.response?.status === 401 && authToken
+        && sentToken === `Bearer ${authToken}`
+        && error.config?.seatifyAuthSession === authSession) {
       setAuthToken(null);
       unauthorizedHandler?.();
     }
